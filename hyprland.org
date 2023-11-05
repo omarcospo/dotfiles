@@ -190,6 +190,46 @@
 		(label :text getdisk :class "inside-box")
 		))
 #+end_src
+** Scripts
+:PROPERTIES:
+:header-args: :tangle ~/.config/eww/scripts/sysinfo :mkdirp yes
+:END:
+#+begin_src sh
+#!/bin/sh
+mem() {
+    printf "%.0f RAM\n" $(free -m | awk '/Mem/ {print $3}')
+}
+cpu1() {
+    printf "$(cat /proc/cpuinfo | awk '/MHz/ {printf "%.2f\n",$NF/1000}' | head -n1)MHz\n"
+}
+cpu2() {
+    printf "$(cat /proc/cpuinfo | awk '/MHz/ {printf "%.2f\n",$NF/1000}' | tail -n1)MHz\n"
+}
+vol() {
+    wpctl get-volume @DEFAULT_AUDIO_SINK@ | awk '{print $NF*100}'
+}
+mic() {
+    wpctl get-volume @DEFAULT_AUDIO_SOURCE@ | awk '{print $NF*100}'
+}
+bright() {
+    brightnessctl g | awk '{print ($1/19200)*100}'
+}
+disk() {
+    df -h /home | awk 'NR==2 {print $2 "/"$3}'
+}
+uptime() {
+    df -h /home | awk 'NR==2 {print $2 "/"$3}'
+}
+[ "$1" = "mem" ] && mem && exit
+[ "$1" = "cpu1" ] && cpu1 && exit
+[ "$1" = "cpu2" ] && cpu2 && exit
+[ "$1" = "vol" ] && vol && exit
+[ "$1" = "mic" ] && mic && exit
+[ "$1" = "bright" ] && bright && exit
+[ "$1" = "disk" ] && disk && exit
+[ "$1" = "uptime" ] && uptime && exit
+exit
+#+end_src
 * Hyprland
 :PROPERTIES:
 :header-args: :tangle ~/.config/hypr/hyprland.conf :mkdirp yes
@@ -342,4 +382,16 @@ binde=, XF86MonBrightnessUp, exec, brightnessctl s +5%
 binde=, XF86MonBrightnessDown, exec, brightnessctl s 5%-
 # Others
 # binde=, XF86Calculator, exec, 
+#+end_src
+* Mako
+:PROPERTIES:
+:header-args: :tangle ~/.config/mako/config :mkdirp yes
+:END:
+#+begin_src conf
+font=Noto Sans 10
+background-color=#17100E
+border-radius=10
+border-color=#CB7154
+padding=14
+default-timeout=10000
 #+end_src
