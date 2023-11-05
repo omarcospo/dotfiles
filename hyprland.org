@@ -1,0 +1,345 @@
+#+PROPERTY: header-args: 
+* Colors
+* EWW
+** Bar
+:PROPERTIES:
+:header-args: :tangle ~/.config/eww/eww.yuck :mkdirp yes
+:END:
+#+begin_src yuck
+(defvar eww "$HOME/.local/bin/eww -c $HOME/.config/eww")
+(defpoll battery :interval "1s" "scripts/battery icon")
+(defpoll battery-cappacity :interval "1s" "scripts/battery percent")
+(defpoll wifi-icon :interval "1s" "scripts/wifi icon")
+(defpoll hour :interval "1s" "date '+%H'")
+(defpoll min :interval "1s" "date '+%M'")
+
+(defwidget power []
+           (eventbox :onhover "${eww} update power=true"
+                     :onhoverlost "${eww} update power=false"
+                     (box :orientation "v"
+                          :space-evenly "false"
+                          :vexpand "false"
+                          :class "powermenu"
+                          (button
+                           :tooltip "Shutdown"
+                           :class "power-fg" "")
+                          (revealer :transition "slideup"
+                                    :reveal power
+                                    :duration "550ms"
+                                    (box :orientation "v"
+                                         :space-evenly "false"
+                                         (button :tooltip "Lock" :class "power-bt1" "")
+                                         (button :tooltip "Restart" :class "power-bt" "")
+                                         ))
+                          )))
+(defvar power false)
+
+(defwidget time []
+           (box	:orientation "v"
+                :class "time"
+                :valign "start"
+                (button hour)
+                (button	min)))
+
+(defwidget sys []
+           (box	:orientation "v"
+                :class "sys"
+                :valign "start"
+                (button :tooltip "Battery: ${battery-cappacity}%" battery)
+                (button :class "wifi" wifi-icon)
+                ))
+
+(defwidget top []
+           (box	:orientation "v"
+                :space-evenly "false"
+                :valign "start"
+                (sidebutton)
+                (power)
+                (time)
+                (sys)))
+
+(defwidget bar []
+           (box :class "bar"
+                :orientation "v"
+                :vexpand "false"
+                :hexpand "false"
+                (top)
+                ))
+
+(defwindow bar
+           :monitor 0
+           :geometry (geometry :x "0"
+                               :y "0"
+                               :height "100%"
+                               :width "40px"
+                               :anchor "center right")
+           :exclusive "true"
+           (bar))
+#+end_src
+** Sidebar
+:PROPERTIES:
+:header-args: :tangle ~/.config/eww/eww.yuck :mkdirp yes
+:END:
+#+begin_src yuck
+(defpoll user :interval "1s" "echo @$USER")
+(defpoll date :interval "1s" "date +%H:%M\" |\"\" %a, \"%B\" \"%d")
+(defpoll getvolume :interval "1s" "scripts/sysinfo vol")
+(defpoll getbright :interval "1s" "scripts/sysinfo bright")
+(defpoll getcpu1 :interval "1s" "scripts/sysinfo cpu1")
+(defpoll getmem :interval "1s" "scripts/sysinfo mem")
+(defpoll getdisk :interval "30m" "scripts/sysinfo disk")
+
+(defwindow sidebar
+	   :monitor 0
+	   :geometry (geometry :x "0"
+			       :y "0"
+			       :height "100%"
+			       :width "380px"
+			       :anchor "center right")
+	   (sidebar))
+
+(defwidget sidebutton []
+	   (eventbox :onhover "${eww} open sidebar"
+		     (box :orientation "v"
+			  :class "sidebutton"
+			  :valign "start"
+			  (button "󰿋"))))
+
+(defwidget sidebar []
+	   (eventbox :onhoverlost "${eww} close sidebar"
+		     (box :class "sidebar"
+			  :space-evenly "false"
+			  :valign "start"
+			  :orientation "v"
+			  :vexpand "false"
+			  :hexpand "false"
+			  (top-side)
+			  (sliders)
+			  (connectivy)
+			  (sys-full)
+			  )))
+
+(defwidget top-side []
+	   (box :space-evenly "false"
+		:orientation "h"
+		:spacing 30
+		:class "top-side"
+		(user)
+		(date-time)))
+
+(defwidget user []
+	   (box	:orientation "h"
+		:class "user"
+		:valign "start"
+		(label :text user)))
+
+(defwidget date-time []
+	   (box	:orientation "h"
+		:class "date"
+		:valign "start"
+		(label :text date)))
+
+
+(defwidget sliders []
+	   (box :class "sliders-box"
+		:orientation "v"
+		:vexpand "false"
+		:hexpand "false"
+		(volume)
+		(brightness)))
+
+(defwidget volume []
+	   (box	:orientation "h"
+		:class "volume"
+		:valign "start"
+		(label :text "󰓃" :class "vol_icon")
+		(scale :flipped "false"
+		       :orientation "h"
+		       :min 0
+		       :max 65
+		       :value getvolume
+		       :onchange "wpctl set-volume @DEFAULT_AUDIO_SINK@ {}%")))
+
+(defwidget brightness []
+	   (box	:orientation "h"
+		:class "bright"
+		:valign "start"
+		(label :text "󰖨" :class "bri_icon")
+		(scale :flipped "false"
+		       :orientation "h"
+		       :min 1
+		       :max 100
+		       :value getbright
+		       :onchange "brightnessctl s {}%")))
+
+(defwidget sys-full []
+	   (box	:orientation "h"
+		:class "sliders-box"
+		:valign "start"
+		(label :text getcpu1 :class "inside-box")
+		(label :text getmem :class "inside-box")
+		(label :text getdisk :class "inside-box")
+		))
+
+(defwidget connectivy []
+	   (box	:orientation "h"
+		:class "sliders-box"
+		:valign "start"
+		(label :text getcpu1 :class "inside-box")
+		(label :text getmem :class "inside-box")
+		(label :text getdisk :class "inside-box")
+		))
+#+end_src
+* Hyprland
+:PROPERTIES:
+:header-args: :tangle ~/.config/hypr/hyprland.conf :mkdirp yes
+:END:
+#+begin_src conf
+monitor=,preferred,auto,auto
+exec-once = hyprpaper
+exec-once = eww daemon && eww open bar
+exec-once = dbus-update-activation-environment --all && dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
+exec-once = /usr/bin/gnome-keyring-daemon --start --components=secrets
+exec-once = /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
+exec-once = wl-paste --watch cliphist store
+env = XCURSOR_SIZE,24
+
+input {
+    kb_layout = br
+    kb_variant =
+    kb_model =
+    kb_options = ctrl:swapcaps
+    kb_rules =
+    repeat_rate = 40
+    repeat_delay = 300
+    follow_mouse = 1
+    numlock_by_default = true
+    touchpad {
+        natural_scroll = true
+    }
+    sensitivity = 0
+}
+
+general {
+    gaps_in = 5
+    gaps_out = 10
+    border_size = 2
+    col.active_border = rgba(d97759ee)
+    col.inactive_border = rgba(595959aa)
+    layout = dwindle
+    allow_tearing = false
+}
+
+decoration {
+    rounding = 10
+    blur {
+        enabled = true
+        size = 3
+        passes = 1
+    }
+    drop_shadow = false
+    shadow_range = 4
+    shadow_render_power = 3
+    col.shadow = rgba(1a1a1aee)
+}
+
+animations {
+    # Some default animations, see https://wiki.hyprland.org/Configuring/Animations/ for more
+    enabled = true
+    bezier = myBezier, 0.05, 0.9, 0.1, 1.05
+    animation = windows, 1, 1, myBezier
+    animation = windowsOut, 1, 1, default, slide
+    animation = border, 1, 10, default
+    animation = borderangle, 1, 8, default
+    animation = fade, 1, 7, default
+    animation = workspaces, 1, 6, default
+}
+
+dwindle {
+    # See https://wiki.hyprland.org/Configuring/Dwindle-Layout/ for more
+    pseudotile = true
+    preserve_split = true
+}
+
+master {
+    # See https://wiki.hyprland.org/Configuring/Master-Layout/ for more
+    new_is_master = true
+}
+
+gestures {
+    workspace_swipe = true
+    workspace_swipe_cancel_ratio = 0.1
+    workspace_swipe_min_speed_to_force = 20
+    workspace_swipe_distance = 200
+}
+
+misc {
+    disable_hyprland_logo = true
+    force_default_wallpaper = 0 # Set to 0 to disable the anime mascot wallpapers
+}
+
+# See https://wiki.hyprland.org/Configuring/Keywords/#per-device-input-configs for more
+device:epic-mouse-v1 {
+    sensitivity = -0.5
+}
+
+# See https://wiki.hyprland.org/Configuring/Window-Rules/ for more
+# windowrule = float, ^(kitty)$
+# windowrulev2 = float,class:^(kitty)$,title:^(kitty)$
+
+# Example binds, see https://wiki.hyprland.org/Configuring/Binds/ for more
+$mainMod = SUPER
+bind = $mainMod, C, killactive,
+bind = $mainMod, V, togglefloating,
+bind = $mainMod, P, pseudo, # dwindle
+bind = $mainMod, J, togglesplit, # dwindle
+# LAUNCHERS
+bind = CTRL, SPACE, exec, pkill wofi || wofi -i --show drun -s ~/.config/hypr/wofi.css
+bind = $mainMod, Q, exec, foot
+bind = $mainMod, W, exec, flatpak run org.mozilla.firefox
+bind = $mainMod, M, exec, emacs
+bind = $mainMod, E, exec, nautilus
+# FOCUS
+bind = $mainMod, up, movefocus, u
+bind = $mainMod, down, movefocus, d
+# Switch workspaces with mainMod + [0-9]
+bind = $mainMod, 1, workspace, 1
+bind = $mainMod, 2, workspace, 2
+bind = $mainMod, 3, workspace, 3
+bind = $mainMod, 4, workspace, 4
+bind = $mainMod, 5, workspace, 5
+bind = $mainMod, 6, workspace, 6
+bind = $mainMod, 7, workspace, 7
+bind = $mainMod, 8, workspace, 8
+bind = $mainMod, 9, workspace, 9
+bind = $mainMod, 0, workspace, 10
+# Move active window to a workspace with mainMod + SHIFT + [0-9]
+bind = $mainMod SHIFT, 1, movetoworkspace, 1
+bind = $mainMod SHIFT, 2, movetoworkspace, 2
+bind = $mainMod SHIFT, 3, movetoworkspace, 3
+bind = $mainMod SHIFT, 4, movetoworkspace, 4
+bind = $mainMod SHIFT, 5, movetoworkspace, 5
+bind = $mainMod SHIFT, 6, movetoworkspace, 6
+bind = $mainMod SHIFT, 7, movetoworkspace, 7
+bind = $mainMod SHIFT, 8, movetoworkspace, 8
+bind = $mainMod SHIFT, 9, movetoworkspace, 9
+bind = $mainMod SHIFT, 0, movetoworkspace, 10
+# Example special workspace (scratchpad)
+bind = $mainMod, S, togglespecialworkspace, magic
+bind = $mainMod SHIFT, S, movetoworkspace, special:magic
+# Scroll through existing workspaces with mainMod + scroll
+bind = $mainMod, mouse_down, workspace, e+1
+bind = $mainMod, mouse_up, workspace, e-1
+# Move/resize windows with mainMod + LMB/RMB and dragging
+bindm = $mainMod, mouse:272, movewindow
+bindm = $mainMod, mouse:273, resizewindow
+# Volume
+binde=, XF86AudioRaiseVolume, exec, wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ 5%+
+binde=, XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-
+# binde=, XF86AudioMute, exec, 
+# Brightness
+binde=, XF86MonBrightnessUp, exec, brightnessctl s +5%
+binde=, XF86MonBrightnessDown, exec, brightnessctl s 5%-
+# Others
+# binde=, XF86Calculator, exec, 
+#+end_src
