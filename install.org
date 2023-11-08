@@ -5,7 +5,7 @@
 #+begin_src sh
 sudo zypper in -y emacs
 #+end_src
-* S**oftware
+* Software
 #+begin_src sh
 sudo zypper in -y $(cat ./packages)
 #+end_src
@@ -118,6 +118,13 @@ xdg-desktop-portal-hyprland
 hyprpaper 
 hyprshot
 swaylock
+wlsunset
+waybar
+swayidle
+foot
+wlclipboard
+blueman
+NetworkManager-applet
 #+end_src
 #+begin_src sh
 emacs --batch --eval "(require 'org)" --eval "(org-babel-tangle-file "hyprland.org")"
