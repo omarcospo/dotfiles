@@ -1,0 +1,9 @@
+#!/bin/sh
+sudo zypper in -y emacs
+
+sudo zypper in -y $(cat ./packages)
+
+wget https://github.com/ryanoasis/nerd-fonts/releases/download/v3.0.2/OpenDyslexic.zip && unzip OpenDyslexic -d ~/.local/share/fonts
+wget https://github.com/ryanoasis/nerd-fonts/releases/download/v3.0.2/VictorMono.zip && unzip VictorMono -d ~/.local/share/fonts
+
+emacs --batch --eval "(require 'org)" --eval "(org-babel-tangle-file "hyprland.org")"

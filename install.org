@@ -1,0 +1,125 @@
+#+PROPERTY: header-args:sh :shebang #!/bin/sh :tangle ./install :mkdirp yes
+#+PROPERTY: header-args:conf :mkdirp yes
+#+PROPERTY: header-args:zsh :tangle ./packages :mkdirp yes
+* Emacs
+#+begin_src sh
+sudo zypper in -y emacs
+#+end_src
+* S**oftware
+#+begin_src sh
+sudo zypper in -y $(cat ./packages)
+#+end_src
+* Fonts
+#+begin_src sh
+wget https://github.com/ryanoasis/nerd-fonts/releases/download/v3.0.2/OpenDyslexic.zip && unzip OpenDyslexic -d ~/.local/share/fonts
+wget https://github.com/ryanoasis/nerd-fonts/releases/download/v3.0.2/VictorMono.zip && unzip VictorMono -d ~/.local/share/fonts
+#+end_src
+* GTK
+#+begin_src conf :tangle ~/.config/gtk-3.0/settings.ini
+[Settings]
+gtk-application-prefer-dark-theme=1
+#+end_src
+#+begin_src conf :tangle ~/.config/gtk-4.0/settings.ini
+[Settings]
+gtk-application-prefer-dark-theme=1
+#+end_src
+#+begin_src conf :tangle ~/.config/gtk-3.0/gtk.css
+@define-color accent_color #f66151;
+@define-color accent_bg_color #e01b24;
+window > headerbar:not(.selection-mode),
+window > .titlebar:not(.selection-mode),
+window > headerbar > headerbar:not(.selection-mode),
+window > .titlebar > .titlebar:not(.selection-mode),
+window > .titlebar > stack > headerbar:not(.selection-mode),
+window headerbar:last-child:not(.selection-mode),
+window .titlebar:last-child:not(.selection-mode),
+#panel .panel-button.window-controls {
+    -natural-hpadding: 0px;
+    -minimum-hpadding: 0px;
+}
+#panel .window-controls-box {
+    spacing: 2px;
+}
+#panel .window-controls-box .window-button {
+    width: 22px;
+}
+#panelLeft .window-controls-container:first-child .window-button:first-child {
+    padding-left: 3px;
+}
+#panelRight .window-controls-container:last-child .window-button:last-child {
+    padding-right: 3px;
+}
+#panel .window-controls-box .icon {
+    background-color: transparent;
+    border-radius: 0;
+    box-shadow: none;
+    border: 0;
+}
+window .windowhandle:not(.selection-mode) {
+  padding-right: 0;
+}
+window headerbar > box.right,
+window .titlebar > box.right {
+  margin: 0 -200px 0 0;
+  opacity: 0;
+}
+window .titlebar.default-decoration {
+    margin: -200px 0 0;
+    opacity: 0;
+}
+#+end_src
+#+begin_src conf :tangle ~/.config/gtk-4.0/gtk.css
+@define-color accent_color #f66151;
+@define-color accent_bg_color #e01b24;
+#panel .panel-button.window-controls {
+    -natural-hpadding: 0px;
+    -minimum-hpadding: 0px;
+}
+#panel .window-controls-box {
+    spacing: 2px;
+}
+
+#panel .window-controls-box .window-button {
+    width: 22px;
+}
+
+#panelLeft .window-controls-container:first-child .window-button:first-child {
+    padding-left: 3px;
+}
+
+#panelRight .window-controls-container:last-child .window-button:last-child {
+    padding-right: 3px;
+}
+
+#panel .window-controls-box .icon {
+    background-color: transparent;
+    border-radius: 0;
+    box-shadow: none;
+    border: 0;
+}
+window headerbar windowhandle {
+  margin-right: -6px;
+}
+
+window headerbar windowcontrols.end {
+  margin: 0 -200px 0 0;
+  opacity: 0;
+}
+
+window .titlebar.default-decoration {
+  margin: -200px 0 0;
+  opacity: 0;
+}
+#+end_src
+* Hyprland
+#+begin_src zsh
+hyprland
+xdg-desktop-portal-hyprland
+hyprpaper 
+hyprshot
+swaylock
+#+end_src
+#+begin_src sh
+emacs --batch --eval "(require 'org)" --eval "(org-babel-tangle-file "hyprland.org")"
+#+end_src
+

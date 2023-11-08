@@ -445,6 +445,7 @@ emacs --batch --eval "(require 'org)" --eval "(org-babel-tangle-file "README.org
 
 (use-package rainbow-mode
   :config
+  (add-hook 'text-mode-hook 'rainbow-mode)
   (add-hook 'prog-mode-hook 'rainbow-mode))
 
 (use-package highlight-parentheses
@@ -921,25 +922,18 @@ emacs --batch --eval "(require 'org)" --eval "(org-babel-tangle-file "README.org
 #+begin_src emacs-lisp
 (use-package config-files
   :straight nil
-  :init
-  (transient-define-prefix config-management ()
-    "Manage my config files."
-    [
-     ["Editors"
-      ("e" "Emacs" (lambda () (interactive) (find-file "~/.config/emacs/README.org")))
-      ]
-     ["Config"
-      ]
-     ["System"
-      ("z" "Zsh" (lambda () (interactive) (find-file "~/.config/zsh/.zshrc")))
-      ]
-     ])
+  :config
+  (defun config-management ()
+    (interactive)
+    (defvar dotfiles "~/.config/dotfiles")
+    (find-file
+     (expand-file-name
+      (completing-read "Open config: " files) dotfiles)))
   :general
   (:states '(normal visual emacs)
            :prefix "SPC"
            "a"  'config-management))
 #+end_src
-
 ** Languages
 *** IDE Features
 :PROPERTIES:
@@ -1221,56 +1215,70 @@ emacs --batch --eval "(require 'org)" --eval "(org-babel-tangle-file "README.org
    #+begin_src emacs-lisp
 ;;; init-markdown.el -*- lexical-binding: t; -*-
 #+end_src
-
 #+begin_src emacs-lisp
-(use-package markdown-mode
-  :straight t
-  :straight edit-indirect
-  :ensure t
-  :mode "\\.md\\'"
-  :commands markdown-mode
-  :straight grip-mode)
-#+end_src
+(defun waybar-restart ()
+  (call-process-shell-command (format "killall waybar ; waybar &")))
 
-#+begin_src emacs-lisp
-(transient-define-prefix md-menu ()
-  "Menu to manage markdown-mode."
-  [
-   ["Insert"
-    ("im" "Image" markdown-insert-image)
-    ]
-   ["Style"
-    ("sb" "Bold" markdown-insert-bold)
-    ]
-   ])
+(defun waybar-auto-restart ()
+  (interactive)
+  (let* ((waybar "/home/marcos/.config/waybar"))
+    (if (memq 'waybar-restart after-save-hook)
+	(remove-hook 'after-save-hook 'waybar-restart t)
+      (when (s-prefix-p waybar (buffer-file-name))
+	(add-hook 'after-save-hook 'waybar-restart nil t)))))
 
-(use-package md-menu
-  :straight nil
-  :after transient
-  :general
-  (:states '(normal visual motion)
-           :keymaps 'markdown-mode-map
-           "n" '(md-menu :which-key "Markdown")))
-#+end_src
+(add-hook 'prog-mode-hook 'waybar-auto-restart)
+		     (use-package json-mode :mode (css-mode . "\\waybar/config\\"))
+		     #+end_src
+		     #+begin_src emacs-lisp
+		     (use-package markdown-mode
+		      :straight t
+		      :straight edit-indirect
+		      :ensure t
+		      :mode "\\.md\\'"
+		      :commands markdown-mode
+		      :straight grip-mode)
+		     #+end_src
 
-#+begin_src emacs-lisp
-(use-package csv-mode :commands csv-mode :mode "\\.csv\\'" :hook (csv-mode . csv-align-mode))
-#+end_src
+		     #+begin_src emacs-lisp
+		     (transient-define-prefix md-menu ()
+		      "Menu to manage markdown-mode."
+		      [
+			  ["Insert"
+			   ("im" "Image" markdown-insert-image)
+			  ]
+			  ["Style"
+			   ("sb" "Bold" markdown-insert-bold)
+			  ]
+		      ])
 
-#+begin_src emacs-lisp
-(use-package yuck-mode
-  :commands yuck-mode
-  :mode "\\.yuck\\'"
-  :general
-  (:states '(normal visual motion)
-           :keymaps 'yuck-mode-map
-           "nf" '(indent-buffer :which-key "Format buffer")))
-#+end_src
+		     (use-package md-menu
+		      :straight nil
+		      :after transient
+		      :general
+		      (:states '(normal visual motion)
+		       :keymaps 'markdown-mode-map
+		       "n" '(md-menu :which-key "Markdown")))
+		     #+end_src
 
-#+begin_src emacs-lisp
-(provide 'init-markdown)
-#+end_src
-*** Nim
+		     #+begin_src emacs-lisp
+		     (use-package csv-mode :commands csv-mode :mode "\\.csv\\'" :hook (csv-mode . csv-align-mode))
+		     #+end_src
+
+		     #+begin_src emacs-lisp
+		     (use-package yuck-mode
+		      :commands yuck-mode
+		      :mode "\\.yuck\\'"
+		      :general
+		      (:states '(normal visual motion)
+		       :keymaps 'yuck-mode-map
+		       "nf" '(indent-buffer :which-key "Format buffer")))
+		     #+end_src
+
+		     #+begin_src emacs-lisp
+		     (provide 'init-markdown)
+		     #+end_src
+		     *** Nim
    :PROPERTIES:
    :header-args: :tangle ~/.config/emacs/modules/init-nim.el :mkdirp yes
    :END:
@@ -1416,7 +1424,14 @@ emacs --batch --eval "(require 'org)" --eval "(org-babel-tangle-file "README.org
 (setq org-log-into-drawer t)
 (setq org-todo-keywords '((sequence "TODO(t)" "|" "DONE(d)" "CANCELLED(c)" )))
 #+end_src
-
+#+begin_src emacs-lisp
+(defun org-auto-tangle-save ()
+  (interactive)
+  (if (memq 'org-babel-tangle after-save-hook)
+      (remove-hook 'after-save-hook 'org-babel-tangle t)
+    (add-hook 'after-save-hook 'org-babel-tangle nil t)))
+(add-hook 'org-mode-hook 'org-auto-tangle-save)
+#+end_src
 **** Completion
 #+begin_src emacs-lisp
 (setq cape-dict-file (expand-file-name "wordlist" init-cache-dir))
