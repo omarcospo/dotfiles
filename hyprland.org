@@ -260,6 +260,7 @@ makoctl history | jq '.data[].[] | .["summary"].data + ";" + .["body"].data' -r
 :PROPERTIES:
 :header-args: conf :tangle ~/.config/hypr/hyprland.conf :mkdirp yes
 :END:
+** Start
 #+begin_src conf
 exec-once= /bin/sh ~/.config/hypr/scripts/start
 #+end_src
@@ -273,12 +274,11 @@ wl-paste --watch cliphist store &
 waybar &
 nm-applet &
 blueman-applet &
+swayidle -w timeout 300 'swaylock -f -c 000000' \
+            timeout 600 'systemctl suspend' \
+            before-sleep 'swaylock -f -c 000000' &
 #+end_src
-#+begin_src sh :shebang #!/bin/sh :tangle ~/.config/hypr/scripts/sleep :mkdirp yes
-# swayidle -w timeout 300 'swaylock -f -c 000000' \
-#             timeout 600 'systemctl suspend' \
-#             before-sleep 'swaylock -f -c 000000' &
-#+end_src
+** Misc
 #+begin_src conf
 monitor=,preferred,auto,auto
 env = XCURSOR_SIZE,24
