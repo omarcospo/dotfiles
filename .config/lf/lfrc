@@ -1,0 +1,40 @@
+set drawbox
+set ratios 1:2
+set info size:time
+set hidden
+
+map p : paste; clear
+
+map <c-d> trash
+
+cmd trash %{{
+    set -f
+    printf "Delete? (Y/N): "
+    read confirm
+    [ "$confirm" == "y" ] && rm -rf "$fx" || echo "Not deleting."
+}}
+
+map c
+map cc clear
+
+map cf push %touch<space>
+cmd mkdir %{{
+    IFS=" "
+    mkdir -p -- "$*"
+    lf -remote "send $id select \"$*\""
+}}
+map cd push :mkdir<space>
+
+cmd fzf_jump ${{
+    res="$(find . -maxdepth 1 | fzf --reverse --header='Jump to location')"
+    if [ -n "$res" ]; then
+        if [ -d "$res" ]; then
+            cmd="cd"
+        else
+            cmd="select"
+        fi
+        res="$(printf '%s' "$res" | sed 's/\\/\\\\/g;s/"/\\"/g')"
+        lf -remote "send $id $cmd \"$res\""
+    fi
+}}
+map f :fzf_jump
