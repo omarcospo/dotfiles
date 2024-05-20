@@ -8,7 +8,7 @@ notify_each_step = true
 only = ["system", "firmware", "flatpak", "gnome_shell_extensions", "tldr"]
 no_self_update = true
 [post_commands]
-"Arch Cleanup" = "rm -rf /var/cache/pacman/ && paru -scc && paru -Rscn $(paru -Qqdt)"
+"Arch Cleanup" = "sudo rm -rf /var/cache/pacman/ && paru -scc && paru -Rscn $(paru -Qqdt)"
 [commands]
 [linux]
 arch_package_manager = "paru"
