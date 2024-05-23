@@ -15,6 +15,7 @@ set previewer '~/.config/lf/scope'
 
 # Better defaults
 map . :set hidden!
+map i :set preview!
 map <c-q> :quit
 map c
 map cc clear

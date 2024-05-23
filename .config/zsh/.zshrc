@@ -14,6 +14,8 @@ export PATH="/var/lib/flatpak/exports/share:$PATH"
 export PATH="$HOME/.local/share/flatpak/exports/share:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOME/.nimble/bin:$PATH"
+export XDG_DATA_HOME="$HOME"/.local/share
+export XDG_CONFIG_HOME="$HOME"/.config
 
 # No littering
 export CARGO_HOME="$XDG_DATA_HOME"/cargo
