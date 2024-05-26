@@ -6,6 +6,12 @@ dynamic_title = true
 decorations = "full"
 opacity = 0.95
 
+[mouse]
+hide_when_typing = true
+bindings = [
+{ mouse = "Right", mods = "Control", action = "Paste" },
+]
+
 [[hints.enabled]]
 command = "xdg-open"
 hyperlinks = true
