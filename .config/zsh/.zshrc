@@ -7,7 +7,6 @@ alias ee='eza'
 alias qq='clear'
 alias eq='exit'
 alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
-alias vv='nvim'
 
 # Paths
 export PATH="/var/lib/flatpak/exports/share:$PATH"
@@ -33,6 +32,17 @@ pyenv() {source "$HOME/.local/python/bin/activate"}
 
 eza() {command eza -lah --color always "$@"}
 cd() {builtin cd "$@" && command eza -lah --color always}
+
+vt() { NVIM_APPNAME=nvim-test nvim "$@" }
+vv() { NVIM_APPNAME=nvim nvim "$@" }
+vq() {
+  # Assumes all configs exist in directories named ~/.config/nvim-*
+  local config=$(fd --max-depth 1 --glob 'nvim*' ~/.config | fzf --prompt="Neovim Configs > " --height=~50% --layout=reverse --border --exit-0)
+  # If I exit fzf without selecting a config, don't open Neovim
+  [[ -z $config ]] && echo "No config selected" && return
+  # Open Neovim with the selected config
+  NVIM_APPNAME=$(basename $config) nvim $@
+}
 
 ###### --------------------------------------
 if [[ $- != *i* ]]; then

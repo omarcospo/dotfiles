@@ -85,7 +85,7 @@ cmd bulkrename ${{
 
 # Finder
 cmd fzf_jump ${{
-    res="$(find . -maxdepth 1 | fzf --reverse --header='Jump to location')"
+    res="$(fd . -d 1 | fzf --reverse --border --header='Jump to location')"
     if [ -n "$res" ]; then
         if [ -d "$res" ]; then
             cmd="cd"
