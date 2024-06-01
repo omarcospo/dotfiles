@@ -22,11 +22,15 @@ map cc clear
 map cd push :mkdir<space>
 map r :rename
 map <c-r> bulkrename
+
 # Goto
 map gh cd ~
 map gc cd ~/.config
 map gr cd /
 map gd cd ~/Downloads
+map gn cd ~/.config/nvim
+map gi cd ~/Imagens
+map go cd ~/Documentos
 
 # Delete
 map <c-d> trash

@@ -13,6 +13,7 @@ export PATH="/var/lib/flatpak/exports/share:$PATH"
 export PATH="$HOME/.local/share/flatpak/exports/share:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOME/.nimble/bin:$PATH"
+export PATH="$HOME/.local/share/go/bin:$PATH"
 export XDG_DATA_HOME="$HOME"/.local/share
 export XDG_CONFIG_HOME="$HOME"/.config
 
@@ -25,6 +26,8 @@ export IPYTHONDIR="$XDG_CONFIG_HOME/ipython"
 export NIMBLE_DIR="$XDG_DATA_HOME/nimble"
 export PYTHONSTARTUP="$HOME"/python/pythonrc
 export RUSTUP_HOME="$XDG_DATA_HOME"/rustup
+export IPYTHONDIR="$XDG_CONFIG_HOME/ipython"
+export JUPYTER_CONFIG_DIR="$XDG_CONFIG_HOME"/jupyter
 
 # Custom commands
 # Activate python environment
