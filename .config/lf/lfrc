@@ -22,6 +22,7 @@ map cc clear
 map cd push :mkdir<space>
 map r :rename
 map <c-r> bulkrename
+map d
 
 # Goto
 map gh cd ~
@@ -41,6 +42,15 @@ cmd trash %{{
   do
     [ "$confirm" == "y" ] && rm -rf "$file" || echo "Not deleting."
   done
+}}
+
+map d trash-multi
+cmd trash-multi ${{
+    res="$(fd . -d 1 | sk --bind=ctrl-f:toggle,ctrl-a:toggle-all --multi --color=bg+:-1,gutter:-1 --reverse --border --header='Delete')"
+    for file in $res
+    do
+      rm -rf "$file" || echo "ERROR: Delete as SUDO"
+    done
 }}
 
 # Extract
@@ -87,15 +97,13 @@ cmd bulkrename ${{
     lf -remote "send $id unselect"
 }}
 
+# Multi delete
+
 # Finder
 cmd fzf_jump ${{
-    res="$(fd . -d 1 | fzf --reverse --border --header='Jump to location')"
+    res="$(fd . -d 1 | sk --bind=ctrl-f:accept --preview "preview.sh {}" --color=bg+:-1,gutter:-1 --reverse --border --header='Jump to location')"
     if [ -n "$res" ]; then
-        if [ -d "$res" ]; then
-            cmd="cd"
-        else
-            cmd="select"
-        fi
+        [ -d "$res" ] && cmd="cd" || cmd="select"
         res="$(printf '%s' "$res" | sed 's/\\/\\\\/g;s/"/\\"/g')"
         lf -remote "send $id $cmd \"$res\""
     fi

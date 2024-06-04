@@ -10,9 +10,10 @@ opacity = 1.00
 
 [mouse]
 hide_when_typing = true
-bindings = [
-{ mouse = "Right", mods = "Control", action = "Paste" },
-]
+bindings = [ { mouse = "Right", mods = "Control", action = "Paste" } ]
+
+[keyboard]
+bindings = [ { action = "CreateNewWindow", key = "N", mods = "Control | Shift" } ]
 
 [[hints.enabled]]
 command = "xdg-open"
