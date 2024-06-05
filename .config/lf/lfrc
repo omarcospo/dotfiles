@@ -101,7 +101,7 @@ cmd bulkrename ${{
 
 # Finder
 cmd fzf_jump ${{
-    res="$(fd . -d 1 | sk --bind=ctrl-f:accept --preview "preview.sh {}" --color=bg+:-1,gutter:-1 --reverse --border --header='Jump to location')"
+    res="$(fd . -d 1 -H | sk --bind=ctrl-f:accept --preview "preview.sh {}" --color=bg+:-1,gutter:-1 --reverse --border --header='Jump to location')"
     if [ -n "$res" ]; then
         [ -d "$res" ] && cmd="cd" || cmd="select"
         res="$(printf '%s' "$res" | sed 's/\\/\\\\/g;s/"/\\"/g')"
