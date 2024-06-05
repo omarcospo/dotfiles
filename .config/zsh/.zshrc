@@ -1,6 +1,8 @@
 # Prompt
-autoload -U promptinit; promptinit
-PS1="[%n] %~ "
+setopt PROMPT_SUBST
+NEWLINE=$'\n'
+PROMPT='%F{yellow}[%n]%f %~ '
+# PS1='[%n] %~'
 
 # Aliases
 alias ee='eza'
@@ -40,7 +42,7 @@ vt() { NVIM_APPNAME=nvim-test nvim "$@" }
 vv() { NVIM_APPNAME=nvim nvim "$@" }
 vf() { NVIM_APPNAME=nvim-fnl nvim "$@" }
 vq() {
-  local config=$(fd --max-depth 1 --glob 'nvim*' ~/.config | fzf --prompt="Neovim Configs > " --height=~50% --bind=ctrl-f:accept --color=bg+:-1,gutter:-1 --reverse --border)
+  local config=$(fd --max-depth 1 --glob 'nvim*' ~/.config | fzf --prompt="  Neovim Config: " --height=~50% --bind=ctrl-f:accept --color=bg+:-1,gutter:-1 --reverse --border)
   [[ -z $config ]] && echo "No config selected" && return
   NVIM_APPNAME=$(basename $config) nvim $@
 }
