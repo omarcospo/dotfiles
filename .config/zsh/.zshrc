@@ -11,9 +11,9 @@ alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 # Paths
 export PATH="/var/lib/flatpak/exports/share:$PATH"
 export PATH="$HOME/.local/share/flatpak/exports/share:$PATH"
-export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOME/.nimble/bin:$PATH"
 export PATH="$HOME/.local/share/go/bin:$PATH"
+export PATH="$HOME/.local/bin:$PATH"
 export XDG_DATA_HOME="$HOME"/.local/share
 export XDG_CONFIG_HOME="$HOME"/.config
 
@@ -38,12 +38,10 @@ cd() {builtin cd "$@" && command eza -lah --color always}
 
 vt() { NVIM_APPNAME=nvim-test nvim "$@" }
 vv() { NVIM_APPNAME=nvim nvim "$@" }
+vf() { NVIM_APPNAME=nvim-fnl nvim "$@" }
 vq() {
-  # Assumes all configs exist in directories named ~/.config/nvim-*
-  local config=$(fd --max-depth 1 --glob 'nvim*' ~/.config | fzf --prompt="Neovim Configs > " --height=~50% --layout=reverse --border --exit-0)
-  # If I exit fzf without selecting a config, don't open Neovim
+  local config=$(fd --max-depth 1 --glob 'nvim*' ~/.config | fzf --prompt="Neovim Configs > " --height=~50% --bind=ctrl-f:accept --color=bg+:-1,gutter:-1 --reverse --border)
   [[ -z $config ]] && echo "No config selected" && return
-  # Open Neovim with the selected config
   NVIM_APPNAME=$(basename $config) nvim $@
 }
 
