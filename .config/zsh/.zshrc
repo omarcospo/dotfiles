@@ -9,6 +9,7 @@ alias ee='eza'
 alias qq='clear'
 alias eq='exit'
 alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
+alias npmi='cd ~/.local && npm install'
 
 # Paths
 export PATH="/var/lib/flatpak/exports/share:$PATH"
@@ -16,6 +17,7 @@ export PATH="$HOME/.local/share/flatpak/exports/share:$PATH"
 export PATH="$HOME/.nimble/bin:$PATH"
 export PATH="$HOME/.local/share/go/bin:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
+export PATH="$HOME/.local/node_modules/.bin:$PATH"
 export XDG_DATA_HOME="$HOME"/.local/share
 export XDG_CONFIG_HOME="$HOME"/.config
 
