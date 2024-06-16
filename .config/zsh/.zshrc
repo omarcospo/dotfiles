@@ -20,6 +20,7 @@ export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOME/.local/node_modules/.bin:$PATH"
 export XDG_DATA_HOME="$HOME"/.local/share
 export XDG_CONFIG_HOME="$HOME"/.config
+export ZK_NOTEBOOK_DIR="$HOME/Notes"
 
 # No littering
 export CARGO_HOME="$XDG_DATA_HOME"/cargo
@@ -37,6 +38,17 @@ export JUPYTER_CONFIG_DIR="$XDG_CONFIG_HOME"/jupyter
 # Activate python environment
 pyenv() {source "$HOME/.local/python/bin/activate"}
 
+yt-dlp() {
+command yt-dlp \
+  --all-subs \
+  --write-annotations \
+  --add-metadata \
+  --embed-subs \
+  --embed-thumbnail \
+  --merge-output-format mkv \
+  -S "res:1920" \
+  "$@"
+}
 eza() {command eza -lah --color always "$@"}
 cd() {builtin cd "$@" && command eza -lah --color always}
 
