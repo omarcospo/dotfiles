@@ -31,6 +31,7 @@ map gd cd ~/Downloads
 map gn cd ~/.config/nvim
 map gi cd ~/Imagens
 map go cd ~/Documentos
+map gp cd ~/Coding
 
 # Delete
 map <c-d> trash
