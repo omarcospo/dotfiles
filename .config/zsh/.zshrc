@@ -21,6 +21,7 @@ export PATH="$HOME/.local/node_modules/.bin:$PATH"
 export XDG_DATA_HOME="$HOME"/.local/share
 export XDG_CONFIG_HOME="$HOME"/.config
 export ZK_NOTEBOOK_DIR="$HOME/Notes"
+export KCAPI="$XDG_DATA_HOME/api.json"
 
 # No littering
 export CARGO_HOME="$XDG_DATA_HOME"/cargo
