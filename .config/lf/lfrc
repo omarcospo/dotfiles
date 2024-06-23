@@ -6,12 +6,13 @@ set hidden
 set icons
 set promptfmt "  󰉋  %w"
 set ifs "\n"
-set scrolloff 5
 set mouse
 set hiddenfiles ".*:*.aux:*.log:*.bbl:*.bcf:*.blg:*.run.xml"
 set period 1
 set previewer '~/.config/lf/scope'
+set shellopts '-eu'
 set shell zsh
+set cursorpreviewfmt "\033[7;2m"
 
 # Better defaults
 map . :set hidden!
@@ -22,7 +23,6 @@ map cc clear
 map cd push :mkdir<space>
 map r :rename
 map <c-r> bulkrename
-
 # Goto
 map gh cd ~
 map gc cd ~/.config
@@ -35,23 +35,23 @@ map gp cd ~/Coding
 map gm cd ~/MEGA
 
 # Delete
+cmd copy_to_clipboard ${{
+    printf '%s' "$fx" | wl-copy
+}}
+map <c-y> :copy_to_clipboard
+
 map <c-d> trash
 cmd trash %{{
-  printf "Delete? (Y/N): "
-  read confirm
-  for file in $fx
-  do
-    [ "$confirm" == "y" ] && rm -rf "$file" || echo "Not deleting."
-  done
+    set -f
+    printf "Delete?[y/n]"
+    read ans
+   	[ "$ans" = "y" ] && printf '%s' "$fx" | xargs -I {} rm -rf {} || echo "ERROR: Not deleting"
 }}
 
-map D trash-multi
+map D trash-jump
 cmd trash-multi ${{
     res="$(fd . -d 1 | sk --bind=ctrl-f:toggle,ctrl-a:toggle-all --multi --color=bg+:-1,gutter:-1 --reverse --border --header='Delete')"
-    for file in $res
-    do
-      rm -rf "$file" || echo "ERROR: Delete as SUDO"
-    done
+   	printf '%s' "$res" | xargs -I {} rm -rf {} || echo "ERROR: Not deleting"
 }}
 
 # Extract
@@ -72,10 +72,7 @@ cmd extract ${{
 map zz zip
 cmd zip ${{
     set -f
-    mkdir $1
-    cp -r $fx $1
-    zip -r $1.zip $1
-    rm -rf $1
+   	printf '%s' "$fx" | atool --add $f.7z
 }}
 
 # Paste
@@ -105,7 +102,7 @@ cmd bulkrename ${{
 
 # Finder
 cmd fzf_jump ${{
-    res="$(fd . -d 1 -H --exclude '.git' | sk --bind=ctrl-f:accept,ctrl-h:backward-delete-char --preview "~/.local/bin/preview.sh {}" --color=bg+:-1,gutter:-1 --reverse --border --header='Jump to location')"
+    res="$(fd . -d 1 -H --exclude '.git' | sk --bind=ctrl-f:accept,ctrl-h:backward-delete-char --preview "~/.config/lf/preview {}" --color=bg+:-1,gutter:-1 --reverse --border --header='Jump to location')"
     if [ -n "$res" ]; then
         [ -d "$res" ] && cmd="cd" || cmd="select"
         res="$(printf '%s' "$res" | sed 's/\\/\\\\/g;s/"/\\"/g')"
@@ -116,7 +113,7 @@ map f :fzf_jump
 
 # Recursive Finder
 cmd fzf_recursive ${{
-    res="$(fd . -d 4 -H --exclude '.git' | sk --bind=ctrl-f:accept,ctrl-h:backward-delete-char --preview "~/.local/bin/preview.sh {}" --color=bg+:-1,gutter:-1 --reverse --border --header='Jump to location')"
+    res="$(fd . -d 4 -H --exclude '.git' | sk --bind=ctrl-f:accept,ctrl-h:backward-delete-char --preview "~/.config/lf/preview {}" --color=bg+:-1,gutter:-1 --reverse --border --header='Jump to location')"
     if [ -n "$res" ]; then
         [ -d "$res" ] && cmd="cd" || cmd="select"
         res="$(printf '%s' "$res" | sed 's/\\/\\\\/g;s/"/\\"/g')"
