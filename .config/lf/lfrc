@@ -5,13 +5,14 @@ set info size:time
 set hidden
 set icons
 set promptfmt "  󰉋  %w"
-set shellopts '-eu'
 set ifs "\n"
 set scrolloff 5
 set mouse
 set hiddenfiles ".*:*.aux:*.log:*.bbl:*.bcf:*.blg:*.run.xml"
 set period 1
 set previewer '~/.config/lf/scope'
+set shell zsh
+set promptfmt "\033[34;1m%d\033[0m\033[1m%f\033[0m"
 
 # Better defaults
 map . :set hidden!
@@ -32,6 +33,7 @@ map gn cd ~/.config/nvim
 map gi cd ~/Imagens
 map go cd ~/Documentos
 map gp cd ~/Coding
+map gm cd ~/MEGA
 
 # Delete
 map <c-d> trash
@@ -84,16 +86,21 @@ map p : paste; clear
 cmd bulkrename ${{
     tmpfile_old="$(mktemp)"
     tmpfile_new="$(mktemp)"
+    # Determine file list
     [ -n "$fs" ] && fs=$(basename -a $fs) || fs=$(ls)
-    echo "$fs" > "$tmpfile_old"
-    echo "$fs" > "$tmpfile_new"
-    nvim "$tmpfile_new"
+    echo "$fs" > "$tmpfile_old" && cp "$tmpfile_old" "$tmpfile_new"
+    # Open the tmpfile_new in a nested Neovim instance and wait until it's closed
+    nvim -c "au BufWritePost * qa!" "$tmpfile_new"
+    # Check if line counts match
     [ "$(wc -l < "$tmpfile_old")" -eq "$(wc -l < "$tmpfile_new")" ] || { rm -f "$tmpfile_old" "$tmpfile_new"; exit 1; }
+    # Process the renamed files
     paste "$tmpfile_old" "$tmpfile_new" | while IFS="$(printf '\t')" read -r src dst
     do
         [ "$src" = "$dst" ] || [ -e "$dst" ] || mv -- "$src" "$dst"
     done
+    # Clean up temporary files
     rm -f "$tmpfile_old" "$tmpfile_new"
+    # Notify lf to unselect
     lf -remote "send $id unselect"
 }}
 
