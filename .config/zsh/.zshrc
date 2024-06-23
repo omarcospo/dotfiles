@@ -2,7 +2,6 @@
 setopt PROMPT_SUBST
 NEWLINE=$'\n'
 PROMPT='%F{yellow}[%n]%f %~ '
-# PS1='[%n] %~'
 
 # Aliases
 alias ee='eza'
@@ -34,6 +33,12 @@ export PYTHONSTARTUP="$HOME"/python/pythonrc
 export RUSTUP_HOME="$XDG_DATA_HOME"/rustup
 export IPYTHONDIR="$XDG_CONFIG_HOME/ipython"
 export JUPYTER_CONFIG_DIR="$XDG_CONFIG_HOME"/jupyter
+
+# FZF
+FUZZY_OPTS="--color=bg+:-1,gutter:-1 --reverse --border --bind ctrl-f:accept,ctrl-h:backward-delete-char"
+export FZF_DEFAULT_OPTS=$FUZZY_OPTS
+export SKIM_DEFAULT_OPTIONS=$FUZZY_OPTS
+export _ZO_FZF_OPTS=$FUZZY_OPTS
 
 # Custom commands
 # Activate python environment
