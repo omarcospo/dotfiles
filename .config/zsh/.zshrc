@@ -229,3 +229,4 @@ fi
 # Extensions
 source "$HOME/.config/zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 source "$HOME/.config/zsh/zsh-autosuggestions/zsh-autosuggestions.zsh"
+eval "$(zoxide init --cmd cd zsh)"
