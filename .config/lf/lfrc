@@ -125,6 +125,20 @@ cmd fzf_recursive ${{
 }}
 map <c-f> :fzf_recursive
 
+cmd fzf_search ${{
+    RG_PREFIX="rg --column --line-number --no-heading --color=always --smart-case "
+    res="$(
+        FZF_DEFAULT_COMMAND="$RG_PREFIX ''" \
+            fzf --bind "change:reload:$RG_PREFIX {q} || true" \
+            --color=bg+:-1,gutter:-1 --reverse --border \
+            --bind=ctrl-f:accept,ctrl-h:backward-delete-char \
+            --ansi --header 'Search in files' \
+            | cut -d':' -f1 | sed 's/\\/\\\\/g;s/"/\\"/g'
+    )"
+    [ -n "$res" ] && lf -remote "send $id select \"$res\""
+}}
+map s :fzf_search
+
 map cf push %touch<space>
 
 cmd mkdir %{{
