@@ -12,7 +12,6 @@ set hiddenfiles ".*:*.aux:*.log:*.bbl:*.bcf:*.blg:*.run.xml"
 set period 1
 set previewer '~/.config/lf/scope'
 set shell zsh
-set promptfmt "\033[34;1m%d\033[0m\033[1m%f\033[0m"
 
 # Better defaults
 map . :set hidden!
@@ -136,8 +135,12 @@ cmd mkdir %{{
 
 #Git integration
 cmd on-cd &{{
-    # Get the latest commit info
+  # Get the latest commit info
+  if [ -d .git ] || [ -f .git ]; then
     commit_info=$(git log -1 --pretty=format:"[%an, %ar : %s]") || true
     fmt="\033[34;1m%d\033[0m\033[1m%f\033 \033[35;1m$commit_info\033"
-    lf -remote "send $id set promptfmt \"$fmt\""
+  else
+    fmt="\033[34;1m%d\033[0m\033[1m%f\033[0m"
+  fi
+  lf -remote "send $id set promptfmt \"$fmt\""
 }}
