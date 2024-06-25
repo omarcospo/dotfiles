@@ -83,8 +83,8 @@ cmd bulkrename ${{
     tmpfile_old="$(mktemp)"
     tmpfile_new="$(mktemp)"
     # Determine file list
-    [ -n "$fs" ] && fs=$(basename -a $fs) || fs=$(ls)
-    echo "$fs" > "$tmpfile_old" && cp "$tmpfile_old" "$tmpfile_new"
+    printf "$fs" | tr '\n' '\0' | xargs -0 -n 1 basename > "$tmpfile_old"
+		cp "$tmpfile_old" "$tmpfile_new"
     # Open the tmpfile_new in a nested Neovim instance and wait until it's closed
     nvim -c "au BufWritePost * qa!" "$tmpfile_new"
     # Check if line counts match
