@@ -136,8 +136,6 @@ cmd fzf_search ${{
 }}
 map s :fzf_search
 
-map cf push %touch<space>
-
 cmd mkdir %{{
     IFS=" "
     mkdir -p -- "$*"
@@ -155,3 +153,29 @@ cmd on-cd &{{
   fi
   lf -remote "send $id set promptfmt \"$fmt\""
 }}
+
+cmd create-file %{{
+	printf "Create file: "
+	read file_name
+	touch $file_name
+}}
+map cf :create-file
+
+#Create go project
+cmd create-go %{{
+  printf "Project name: "
+  read project_name
+  mkdir "$project_name"
+
+  go_version=$(go version | cut -d " " -f 3 | sed "s/go/go /g")
+
+  printf "module $project_name\n\n$go_version" >> "$project_name"/go.mod
+
+  printf "package main\n\n" >> "$project_name"/main.go
+
+  printf "import (\n\t\"fmt\"\n)\n\n" >> "$project_name"/main.go
+
+  printf "func main() {\n\tfmt.Println(\"Hello World!\")\n}" >> "$project_name"/main.go
+}}
+
+map cg :create-go
