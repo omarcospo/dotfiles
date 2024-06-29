@@ -67,7 +67,7 @@ handle_extension() {
 
 handle_mime() {
 	case "${MIMETYPE}" in
-	  text/* | */xml | application/json | application/x-ndjson)
+	  *)
 	    bat --style "${BAT_STYLE:-plain}" --theme "base16" --pager=never -f "${FILE_PATH}" ;;
   esac
 }
