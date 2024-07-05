@@ -1,0 +1,17 @@
+// Place your key bindings in this file to override the defaults
+[
+    {
+        "key": "ctrl+q",
+        "command": "amVim.escape",
+        "when": "editorTextFocus"
+    },
+    {
+        "key": "escape",
+        "command": "-amVim.escape",
+        "when": "editorTextFocus"
+    },
+    {
+        "key": "ctrl+q",
+        "command": "-workbench.action.quit"
+    }
+]
