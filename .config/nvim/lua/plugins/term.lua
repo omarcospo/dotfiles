@@ -37,7 +37,7 @@ return {
           vim.keymap.set({ "t", "n" }, "<C-v>", "<C-\\><C-n><cmd>ToggleTerm<CR>", { buffer = true, silent = true })
           vim.keymap.set("t", "<c-q>", "<c-\\><c-n>")
           vim.keymap.set("t", "<esc>", "<c-\\><c-n>")
-          vim.cmd("startinsert!")
+          vim.cmd("startinsert")
         end,
       })
     end,
