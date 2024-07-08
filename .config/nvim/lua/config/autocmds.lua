@@ -14,7 +14,7 @@ local function run_cmd(cmd, show_error)
 end
 
 local function trigger_event(event, is_urgent)
-  -- define behavior
+ 
   local function trigger()
     local is_user_event = string.match(event, "^User ") ~= nil
     if is_user_event then
@@ -39,11 +39,11 @@ vim.api.nvim_create_autocmd({ "BufReadPost", "BufNewFile", "BufWritePost" }, {
     local git_repo =
       run_cmd({ "git", "-C", vim.fn.fnamemodify(vim.fn.resolve(vim.fn.expand("%")), ":p:h"), "rev-parse" }, false)
 
-    -- For any file exept empty buffer, or the greeter (alpha)
+   
     if not (empty_buffer or greeter) then
       trigger_event("User BaseFile")
 
-      -- Is the buffer part of a git repo?
+     
       if git_repo then
         trigger_event("User BaseGitFile")
       end
@@ -54,12 +54,12 @@ vim.api.nvim_create_autocmd({ "BufReadPost", "BufNewFile", "BufWritePost" }, {
 vim.api.nvim_create_autocmd({ "VimEnter" }, {
   desc = "Nvim user event that trigger a few ms after nvim starts",
   callback = function()
-    -- If nvim is opened passing a filename, trigger the event inmediatelly.
+   
     if #vim.fn.argv() >= 1 then
-      -- In order to avoid visual glitches.
+     
       trigger_event("User BaseDefered", true)
-      trigger_event("BufEnter", true) -- also, initialize tabline_buffers.
-    else -- Wait some ms before triggering the event.
+      trigger_event("BufEnter", true)
+    else
       vim.defer_fn(function()
         trigger_event("User BaseDefered")
       end, 70)

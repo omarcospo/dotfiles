@@ -2,14 +2,14 @@
 vim.opt.shiftwidth = 2
 vim.opt.tabstop = 2
 vim.opt.softtabstop = 2
-vim.opt.expandtab = true --- spaces to tab
-vim.opt.smartcase = true --- don't ignore case with capitals
-vim.opt.smartindent = true --- insert indents automatically
+vim.opt.expandtab = true
+vim.opt.smartcase = true
+vim.opt.smartindent = true
 vim.opt.preserveindent = true
 --- Copy/Paste
-vim.opt.clipboard = "unnamedplus" --- copy/paste to system clipboard
-vim.opt.copyindent = true -- Copy the previous indentation on autoindenting.
-vim.opt.virtualedit = "block" -- Allow going past end of line in visual block mode.
+vim.opt.clipboard = "unnamedplus"
+vim.opt.copyindent = true
+vim.opt.virtualedit = "block"
 
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "

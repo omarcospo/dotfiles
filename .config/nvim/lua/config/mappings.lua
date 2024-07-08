@@ -41,10 +41,10 @@ vim.keymap.set("n", "<C-k>", "<cmd>m .-2<cr>==")
 vim.keymap.set("v", "<C-j>", ":m '>+1<cr>gv=gv")
 vim.keymap.set("v", "<C-k>", ":m '<-2<cr>gv=gv")
 ---- Comenting
-vim.keymap.set("n", "gco", "O<esc>Vcx<esc><cmd>normal gcc<cr>fxa<bs>") --- above
-vim.keymap.set("n", "gcO", "o<esc>Vcx<esc><cmd>normal gcc<cr>fxa<bs>") --- below
+vim.keymap.set("n", "gco", "O<esc>Vcx<esc><cmd>normal gcc<cr>fxa<bs>")
+vim.keymap.set("n", "gcO", "o<esc>Vcx<esc><cmd>normal gcc<cr>fxa<bs>")
 ---- Format and wrap
-vim.keymap.set("v", "w", ":'<,'>!fmt -80<CR>") --- below
+vim.keymap.set("v", "w", ":'<,'>!fmt -80<CR>")
 ---- Add thing at end of line
 function Add_at_end(char)
   local cursor = vim.api.nvim_win_get_cursor(0)
