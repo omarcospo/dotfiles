@@ -1,0 +1,6 @@
+#!/bin/sh
+if [ -d "$1" ] ;then
+  tree -C "$1" | head -n27
+else
+  bat --style "${BAT_STYLE:-plain}" --theme "base16" --pager=never -f "$1" | head -n27
+fi

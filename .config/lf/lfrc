@@ -101,7 +101,7 @@ cmd bulkrename ${{
 
 # Finder
 cmd fzf_jump ${{
-    res="$(fd . -d 1 -H --exclude '.git' | fzf --bind=ctrl-f:accept,ctrl-h:backward-delete-char --preview "~/.config/lf/preview {}" --color=bg+:-1,gutter:-1 --reverse --border --header='Jump to location')"
+    res="$(fd . -d 1 -H --exclude '.git' | fzf --bind=ctrl-f:accept,ctrl-h:backward-delete-char --preview "fzf_preview {}" --color=bg+:-1,gutter:-1 --reverse --border --header='Jump to location')"
     if [ -n "$res" ]; then
         [ -d "$res" ] && cmd="cd" || cmd="select"
         res="$(printf '%s' "$res" | sed 's/\\/\\\\/g;s/"/\\"/g')"
@@ -112,7 +112,7 @@ map f :fzf_jump
 
 # Recursive Finder
 cmd fzf_recursive ${{
-    res="$(fd . -d 4 -H --exclude '.git' | fzf --bind=ctrl-f:accept,ctrl-h:backward-delete-char --preview "~/.config/lf/preview {}" --color=bg+:-1,gutter:-1 --reverse --border --header='Jump to location')"
+    res="$(fd . -d 4 -H --exclude '.git' | fzf --bind=ctrl-f:accept,ctrl-h:backward-delete-char --preview "fzf_preview {}" --color=bg+:-1,gutter:-1 --reverse --border --header='Jump to location')"
     if [ -n "$res" ]; then
         [ -d "$res" ] && cmd="cd" || cmd="select"
         res="$(printf '%s' "$res" | sed 's/\\/\\\\/g;s/"/\\"/g')"
