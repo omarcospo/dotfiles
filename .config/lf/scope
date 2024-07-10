@@ -67,6 +67,8 @@ handle_extension() {
 
 handle_mime() {
 	case "${MIMETYPE}" in
+	  image/*)
+	    identify -verbose "${FILE_PATH}" | head -n7 ;;
 	  *)
 	    bat --style "${BAT_STYLE:-plain}" --theme "base16" --pager=never -f "${FILE_PATH}" ;;
   esac

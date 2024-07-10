@@ -92,7 +92,6 @@
     "workbench.iconTheme": "material-icon-theme",
     "workbench.layoutControl.enabled": false,
     "workbench.list.horizontalScrolling": true,
-    "workbench.preferredDarkColorTheme": "Moegi Dark",
     "workbench.preferredLightColorTheme": "Adwaita Light",
     "workbench.productIconTheme": "adwaita",
     "workbench.settings.enableNaturalLanguageSearch": false,
@@ -114,4 +113,5 @@
     "codesnap.transparentBackground": true,
     "breadcrumbs.enabled": false,
     "terminal.external.linuxExec": "alacritty",
+    "workbench.preferredDarkColorTheme": "Moegi Dark",
 }
