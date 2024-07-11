@@ -1,2 +1,3 @@
 .config/nvim/.undo
 .vscode-oss/extensions/
+.vscode-oss/argv.json
