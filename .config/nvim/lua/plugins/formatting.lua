@@ -24,6 +24,7 @@ return {
 			javascript = { "biome" },
 			json = { "biome" },
 			css = { "prettier" },
+			scss = { "prettier" },
 			lua = { "stylua" },
 			go = { "gofumpt", "goimports-reviser", "golines" },
 			markdown = { "mdformat" },
