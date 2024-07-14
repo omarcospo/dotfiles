@@ -133,15 +133,15 @@ export LESS_TERMCAP_so=$'\e[47;30m'
 export LESSPROMPT='?f%f .?ltLine %lt:?pt%pt\%:?btByte %bt:-...'
 
 # LOAD
-autoload -U compinit     # completion
+autoload -Uz compinit && compinit     # completion
 autoload -U terminfo     # terminfo keys
 zmodload -i zsh/complist # menu completion
 
 ## --- KEYS
 autoload -U up-line-or-beginning-search; zle -N up-line-or-beginning-search
 autoload -U down-line-or-beginning-search; zle -N down-line-or-beginning-search
-exp_alias()
-{ zle _expand_alias
+exp_alias() {
+  zle _expand_alias
   zle self-insert
 }; zle -N exp_alias
 bindkey -- ' '     exp_alias
