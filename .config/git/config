@@ -1,3 +1,5 @@
 [user]
 	name = omarcospo
 	email = marcos.felipe@usp.br
+[status]
+ showUntrackedFiles = false
