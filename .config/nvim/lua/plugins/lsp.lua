@@ -1,10 +1,10 @@
 return {
 	{
 		"neovim/nvim-lspconfig",
+		event = "BufReadPost",
 		dependencies = {
 			{ "williamboman/mason.nvim", config = true },
 			"williamboman/mason-lspconfig.nvim",
-			"pmizio/typescript-tools.nvim",
 			"zeioth/garbage-day.nvim",
 			"LukasPietzschmann/boo.nvim",
 		},
@@ -110,27 +110,6 @@ return {
 					})
 				end,
 			})
-
-			require("typescript-tools").setup({
-				settings = {
-					complete_function_calls = false,
-					include_completions_with_insert_text = false,
-					code_lens = "off",
-					disable_member_code_lens = false,
-					jsx_close_tag = { enable = false },
-					--- Inlay Hints
-					tsserver_file_preferences = {
-						includeInlayParameterNameHints = "all",
-						includeInlayParameterNameHintsWhenArgumentMatchesName = false,
-						includeInlayFunctionParameterTypeHints = true,
-						includeInlayVariableTypeHints = true,
-						includeInlayVariableTypeHintsWhenTypeMatchesName = false,
-						includeInlayPropertyDeclarationTypeHints = true,
-						includeInlayFunctionLikeReturnTypeHints = true,
-						includeInlayEnumMemberValueHints = true,
-					},
-				},
-			})
 		end,
 	},
 	{
@@ -162,6 +141,32 @@ return {
 		end,
 	},
 	{
+		"pmizio/typescript-tools.nvim",
+		ft = "typescript",
+		config = function()
+			require("typescript-tools").setup({
+				settings = {
+					complete_function_calls = false,
+					include_completions_with_insert_text = false,
+					code_lens = "off",
+					disable_member_code_lens = false,
+					jsx_close_tag = { enable = false },
+					--- Inlay Hints
+					tsserver_file_preferences = {
+						includeInlayParameterNameHints = "all",
+						includeInlayParameterNameHintsWhenArgumentMatchesName = false,
+						includeInlayFunctionParameterTypeHints = true,
+						includeInlayVariableTypeHints = true,
+						includeInlayVariableTypeHintsWhenTypeMatchesName = false,
+						includeInlayPropertyDeclarationTypeHints = true,
+						includeInlayFunctionLikeReturnTypeHints = true,
+						includeInlayEnumMemberValueHints = true,
+					},
+				},
+			})
+		end,
+	},
+	{
 		"luckasRanarison/clear-action.nvim",
 		event = "LspAttach",
 		opts = {
@@ -188,6 +193,7 @@ return {
 	},
 	{
 		"folke/trouble.nvim",
+		event = "LspAttach",
 		cmd = "Trouble",
 		keys = {
 			-- { "gt", "<CMD>Trouble diagnostics toggle filter.buf=0 focus=true<CR>" },

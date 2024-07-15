@@ -11,6 +11,19 @@ return {
 				timeout_ms = 200,
 				lsp_fallback = false,
 			},
+			formatters = {
+				gofumpt = {
+					command = "gofumpt",
+					args = { "$FILENAME" },
+					stdin = false,
+				},
+				typstfmt = {
+					inherit = false,
+					command = "typstfmt",
+					args = { "$FILENAME" },
+					stdin = false,
+				},
+			},
 			formatters_by_ft = {
 				lua = { "stylua" },
 				python = { "ruff_fix", "ruff_organize_imports", "ruff_format" },
@@ -23,7 +36,7 @@ return {
 				go = { "gofumpt", "goimports-reviser", "golines" },
 				markdown = { "mdformat" },
 				sh = { "shellcheck" },
-				typst = { "typstyle" },
+				typst = { "typstfmt" },
 			},
 		})
 		require("mason-conform").setup()
