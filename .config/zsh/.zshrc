@@ -8,6 +8,9 @@ alias qq='clear'
 alias eq='exit'
 alias npmi='cd ~/.local && npm install'
 
+# Software
+export SUDO_EDITOR=/usr/bin/nvim
+export EDITOR=/usr/bin/nvim
 # Paths
 export XDG_DATA_HOME="$HOME"/.local/share
 export XDG_CONFIG_HOME="$HOME"/.config
