@@ -1,5 +1,5 @@
 pcall(function()
-  vim.loader.enable()
+	vim.loader.enable()
 end)
 vim.deprecate = function() end -- Disable deprecation warnings
 ----------------------
@@ -27,12 +27,12 @@ vim.g.loaded_gzip = 1
 vim.g.loaded_2html_plugin = 1
 vim.g.editorconfig = false
 if not vim.g.vscode then
-  require("config.options")
-  require("plugin-manager")
-  require("config.utils")
-  require("config.clean")
-  require("config.mappings")
-  require("config.autocmds")
+	require("config.options")
+	require("plugin-manager")
+	require("config.utils")
+	require("config.clean")
+	require("config.mappings")
+	require("config.autocmds")
 else
-  require("config.vscode")
+	require("config.vscode")
 end
