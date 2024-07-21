@@ -1,14 +1,13 @@
 return {
 	{
 		"neovim/nvim-lspconfig",
-		event = "BufReadPost",
+		ft = { "python", "go", "typescript", "lua" },
 		dependencies = {
 			{ "williamboman/mason.nvim", config = true },
 			"williamboman/mason-lspconfig.nvim",
 			"zeioth/garbage-day.nvim",
 			"LukasPietzschmann/boo.nvim",
 		},
-		ft = { "python", "go", "typescript", "lua" },
 		init = function()
 			local lsp = vim.lsp
 			lsp.handlers["$/progress"] = function() end
