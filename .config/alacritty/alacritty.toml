@@ -4,7 +4,7 @@ TERM = "xterm-256color"
 [window]
 dynamic_title = true
 decorations = "None"
-opacity = 1.00
+opacity = 0.90
 padding = { x = 0, y = 0 }
 
 [mouse]
@@ -36,7 +36,7 @@ style = "Regular"
 
 # Cursor settings
 [cursor]
-style = "Underline"
+# style = "Underline"
 unfocused_hollow = false
 
 # Color settings
@@ -48,22 +48,24 @@ transparent_background_colors = true
 background = "#1c1e1f"
 foreground = "#ffffff"
 
+# Normal colors
 [colors.normal]
-black = "#262626"
-red = "#ee5396"
-green = "#BE95FF"
-yellow = "#42be65"
-blue = "#78a9ff"
-magenta = "#ff7eb6"
-cyan = "#3ddbd9"
-white = "#dde1e6"
+black   = '#1e2127'
+red     = '#e06c75'
+green   = '#98c379'
+yellow  = '#d19a66'
+blue    = '#61afef'
+magenta = '#c678dd'
+cyan    = '#56b6c2'
+white   = '#abb2bf'
 
+# Bright colors
 [colors.bright]
-black = "#393939"
-red = "#ee5396"
-green = "#BE95FF"
-yellow = "#42be65"
-blue = "#78a9ff"
-magenta = "#ff7eb6"
-cyan = "#3ddbd9"
-white = "#dde1e6"
+black   = '#5c6370'
+red     = '#e06c75'
+green   = '#98c379'
+yellow  = '#d19a66'
+blue    = '#61afef'
+magenta = '#c678dd'
+cyan    = '#56b6c2'
+white   = '#ffffff'
