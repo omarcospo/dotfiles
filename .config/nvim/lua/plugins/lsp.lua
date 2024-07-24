@@ -197,7 +197,7 @@ return {
 		keys = {
 			-- { "gt", "<CMD>Trouble diagnostics toggle filter.buf=0 focus=true<CR>" },
 			-- { "gs", "<CMD>Trouble lsp_references toggle focus=true<CR>" },
-			{ "gt", "<CMD>Trouble lsp_document_symbols toggle focus=false win.position=left filter.buf=0<CR>" },
+			{ "tt", "<CMD>Trouble lsp_document_symbols toggle focus=false win.position=left filter.buf=0<CR>" },
 		},
 		opts = {
 			auto_close = true,

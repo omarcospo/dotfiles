@@ -27,6 +27,7 @@ local filetypes = {
 	"xml",
 	"yaml",
 	"typst",
+	"org",
 }
 return {
 	{
@@ -41,6 +42,15 @@ return {
 					vim.cmd("TSBufEnable highlight")
 				end,
 			})
+		end,
+	},
+	{
+		"nvim-orgmode/orgmode",
+		event = "VeryLazy",
+		ft = { "org" },
+		config = function()
+			-- Setup orgmode
+			require("orgmode").setup({})
 		end,
 	},
 }
