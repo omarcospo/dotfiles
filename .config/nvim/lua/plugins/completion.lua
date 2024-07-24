@@ -29,10 +29,11 @@ return {
 				{ name = "digraphs" },
 			},
 			window = {
-				documentation = cmp.config.window.bordered(),
-				completion = cmp.config.window.bordered({
+				documentation = { border = { "┌", "─", "┐", "│", "┘", "─", "└", "│" } },
+				completion = {
 					winhighlight = "Normal:CmpPmenu,CursorLine:PmenuSel,Search:None",
-				}),
+					border = { "┌", "─", "┐", "│", "┘", "─", "└", "│" },
+				},
 			},
 			formatting = {
 				fields = { "kind", "abbr", "menu" },
