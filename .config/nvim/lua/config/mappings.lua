@@ -31,7 +31,7 @@ vim.keymap.set("n", "<c-,>", ":source $MYVIMRC<cr>")
 vim.keymap.set({ "n", "v" }, "<leader><leader>", ":")
 ---- Replace word
 vim.keymap.set("n", "gr", function()
-  return ":%s/" .. vim.fn.expand("<cword>") .. "//g<left><left>"
+	return ":%s/" .. vim.fn.expand("<cword>") .. "//g<left><left>"
 end)
 ---- Fold
 vim.keymap.set("n", "<TAB>", "za")
@@ -47,9 +47,9 @@ vim.keymap.set("n", "gcO", "o<esc>Vcx<esc><cmd>normal gcc<cr>fxa<bs>")
 vim.keymap.set("v", "w", ":'<,'>!fmt -80<CR>")
 ---- Add thing at end of line
 function Add_at_end(char)
-  local cursor = vim.api.nvim_win_get_cursor(0)
-  vim.cmd("norm A" .. char)
-  vim.api.nvim_win_set_cursor(0, cursor)
+	local cursor = vim.api.nvim_win_get_cursor(0)
+	vim.cmd("norm A" .. char)
+	vim.api.nvim_win_set_cursor(0, cursor)
 end
 vim.keymap.set("n", ";", ":lua Add_at_end(';')<CR>")
 vim.keymap.set("n", ",", ":lua Add_at_end(',')<CR>")

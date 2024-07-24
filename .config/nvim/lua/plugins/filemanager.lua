@@ -1,5 +1,4 @@
 return {
-	-- local sendEsc = "<C-\\><C-n>i<Esc>"
 	{
 		"is0n/fm-nvim",
 		keys = {
