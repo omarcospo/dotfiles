@@ -17,7 +17,7 @@ return {
 				vim.lsp.buf.signature_help()
 			end, { buffer = true })
 			vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers["signature_help"], {
-				border = "rounded",
+				border = "single",
 				close_events = { "CursorMoved", "BufHidden", "InsertCharPre" },
 			})
 			vim.keymap.set("n", "gd", "<cmd>lua require('boo').boo()<CR>")
@@ -179,7 +179,7 @@ return {
 			},
 			popup = {
 				enable = true,
-				border = "rounded",
+				border = "single",
 				hide_cursor = true,
 				hide_client = true,
 			},

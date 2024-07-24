@@ -21,7 +21,7 @@ return {
 				close_on_exit = true,
 				auto_scroll = true,
 				direction = "horizontal",
-				float_opts = { border = "rounded" },
+				float_opts = { border = "single" },
 				winbar = { enabled = false },
 			}
 		end,

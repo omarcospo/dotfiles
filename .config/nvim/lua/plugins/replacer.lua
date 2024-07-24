@@ -4,7 +4,7 @@ return {
 	opts = {
 		popupWin = {
 			title = "Replace",
-			border = "rounded",
+			border = "single",
 			position = "top",
 		},
 	},

@@ -29,7 +29,10 @@ return {
 				{ name = "digraphs" },
 			},
 			window = {
-				documentation = { border = { "┌", "─", "┐", "│", "┘", "─", "└", "│" } },
+				documentation = {
+					border = { "┌", "─", "┐", "│", "┘", "─", "└", "│" },
+					winhighlight = "Normal:CmpPmenu,CursorLine:PmenuSel,Search:None",
+				},
 				completion = {
 					winhighlight = "Normal:CmpPmenu,CursorLine:PmenuSel,Search:None",
 					border = { "┌", "─", "┐", "│", "┘", "─", "└", "│" },

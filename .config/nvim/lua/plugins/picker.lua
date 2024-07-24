@@ -7,6 +7,7 @@ return {
 				on_create = function()
 					vim.keymap.set("t", "<C-q>", "<C-c>", { silent = true, buffer = true })
 				end,
+				border = "single",
 				preview = {
 					layout = "vertical",
 					title = false,

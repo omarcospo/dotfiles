@@ -16,7 +16,7 @@ return {
 				ui = {
 					default = "float",
 					float = {
-						border = "rounded",
+						border = "single",
 						height = 0.9,
 						width = 0.7,
 					},
