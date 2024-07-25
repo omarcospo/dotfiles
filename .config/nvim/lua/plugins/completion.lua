@@ -5,6 +5,7 @@ return {
 	"hrsh7th/nvim-cmp",
 	event = "InsertEnter",
 	dependencies = {
+		"onsails/lspkind.nvim",
 		{ "FelipeLema/cmp-async-path", url = "https://codeberg.org/FelipeLema/cmp-async-path.git" },
 		"hrsh7th/cmp-buffer",
 		"honza/vim-snippets",
@@ -17,14 +18,25 @@ return {
 	config = function()
 		local cmp = require("cmp")
 		local snippy = require("snippy")
+		local lspkind = require("lspkind")
 		require("cmp").setup({
 			sources = {
-				{ name = "snippy", max_item_count = 4, priority = 11 },
-				{ name = "nvim_lsp", max_item_count = 4, priority = 10 },
+				{ name = "snippy", max_item_count = 5, priority = 11 },
+				{ name = "nvim_lsp", max_item_count = 6, priority = 10 },
 				{ name = "buffer", max_item_count = 4, priority = 8 },
-				{ name = "async_path", priority = 4 },
+				{ name = "async_path", priority = 6 },
 				{ name = "calc" },
-				{ name = "digraphs", max_item_count = 4 },
+				{ name = "digraphs", max_item_count = 3 },
+			},
+			formatting = {
+				fields = { "kind", "abbr", "menu" },
+				format = function(entry, vim_item)
+					local kind = lspkind.cmp_format({ mode = "symbol_text", maxwidth = 50 })(entry, vim_item)
+					local strings = vim.split(kind.kind, "%s", { trimempty = true })
+					kind.kind = (strings[1] or "") .. " "
+					kind.menu = (strings[2] or "")
+					return kind
+				end,
 			},
 			window = {
 				documentation = { border = border, winhighlight = highlight },
