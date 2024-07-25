@@ -1,52 +1,34 @@
 ---@diagnostic disable: missing-fields
+local border = { "┌", "─", "┐", "│", "┘", "─", "└", "│" }
+local highlight = "Normal:CmpPmenu,CursorLine:PmenuSel,Search:None"
 return {
 	"hrsh7th/nvim-cmp",
 	event = "InsertEnter",
 	dependencies = {
-		"hrsh7th/cmp-buffer",
-		"onsails/lspkind.nvim",
 		{ "FelipeLema/cmp-async-path", url = "https://codeberg.org/FelipeLema/cmp-async-path.git" },
+		"hrsh7th/cmp-buffer",
+		"honza/vim-snippets",
 		"dcampos/nvim-snippy",
 		"dcampos/cmp-snippy",
-		"honza/vim-snippets",
 		"hrsh7th/cmp-nvim-lsp",
 		"hrsh7th/cmp-calc",
-		"hrsh7th/cmp-emoji",
 		"dmitmel/cmp-digraphs",
 	},
 	config = function()
 		local cmp = require("cmp")
-		local lspkind = require("lspkind")
 		local snippy = require("snippy")
 		require("cmp").setup({
 			sources = {
-				{ name = "snippy", max_item_count = 5, priority = 11 },
-				{ name = "nvim_lsp", max_item_count = 10, priority = 10 },
-				{ name = "buffer", max_item_count = 10, priority = 8 },
-				{ name = "async_path", priority = 6 },
+				{ name = "snippy", max_item_count = 4, priority = 11 },
+				{ name = "nvim_lsp", max_item_count = 4, priority = 10 },
+				{ name = "buffer", max_item_count = 4, priority = 8 },
+				{ name = "async_path", priority = 4 },
 				{ name = "calc" },
-				{ name = "emoji" },
-				{ name = "digraphs" },
+				{ name = "digraphs", max_item_count = 4 },
 			},
 			window = {
-				documentation = {
-					border = { "┌", "─", "┐", "│", "┘", "─", "└", "│" },
-					winhighlight = "Normal:CmpPmenu,CursorLine:PmenuSel,Search:None",
-				},
-				completion = {
-					winhighlight = "Normal:CmpPmenu,CursorLine:PmenuSel,Search:None",
-					border = { "┌", "─", "┐", "│", "┘", "─", "└", "│" },
-				},
-			},
-			formatting = {
-				fields = { "kind", "abbr", "menu" },
-				format = function(entry, vim_item)
-					local kind = lspkind.cmp_format({ mode = "symbol_text", maxwidth = 50 })(entry, vim_item)
-					local strings = vim.split(kind.kind, "%s", { trimempty = true })
-					kind.kind = (strings[1] or "") .. " "
-					kind.menu = (strings[2] or "")
-					return kind
-				end,
+				documentation = { border = border, winhighlight = highlight },
+				completion = { winhighlight = highlight, border = border },
 			},
 			snippet = {
 				expand = function(args)
