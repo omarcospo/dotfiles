@@ -16,8 +16,8 @@ return {
 					default = "float",
 					float = {
 						border = "single",
-						height = 0.95,
-						width = 0.95,
+						height = 0.80,
+						width = 0.75,
 					},
 				},
 				mappings = {
