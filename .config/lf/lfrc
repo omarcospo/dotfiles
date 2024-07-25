@@ -32,7 +32,10 @@ map go cd ~/Documentos
 map gp cd ~/Coding
 map gm cd ~/MEGA
 
-cmd preview ${{ bat --theme "base16" --paging=always "$fx" }}
+cmd preview ${{
+  [ -d "$fx" ] || bat --theme "base16" --paging=always "$fx"
+}}
+
 map i :preview
 
 cmd copy_to_clipboard ${{
