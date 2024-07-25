@@ -1,7 +1,7 @@
 return {
 	{
 		"akinsho/toggleterm.nvim",
-		version = "*",
+		version = false,
 		cmd = { "ToggleTerm", "TermExec" },
 		opts = function()
 			return {

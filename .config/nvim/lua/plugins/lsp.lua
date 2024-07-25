@@ -1,12 +1,13 @@
 return {
 	{
 		"neovim/nvim-lspconfig",
+		version = false,
 		ft = { "python", "go", "typescript", "lua" },
 		dependencies = {
 			{ "williamboman/mason.nvim", config = true },
-			"williamboman/mason-lspconfig.nvim",
-			"zeioth/garbage-day.nvim",
-			"LukasPietzschmann/boo.nvim",
+			{ "williamboman/mason-lspconfig.nvim", version = false },
+			{ "zeioth/garbage-day.nvim" },
+			{ "LukasPietzschmann/boo.nvim" },
 		},
 		init = function()
 			local lsp = vim.lsp
@@ -167,6 +168,7 @@ return {
 	},
 	{
 		"luckasRanarison/clear-action.nvim",
+		version = false,
 		event = "LspAttach",
 		opts = {
 			signs = {
@@ -192,6 +194,7 @@ return {
 	},
 	{
 		"folke/trouble.nvim",
+		version = false,
 		event = "LspAttach",
 		cmd = "Trouble",
 		keys = {
@@ -219,6 +222,7 @@ return {
 	},
 	{
 		"smjonas/inc-rename.nvim",
+		version = false,
 		event = "LspAttach",
 		config = function()
 			require("inc_rename").setup({})

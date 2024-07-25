@@ -1,5 +1,6 @@
 return {
 	"stevearc/conform.nvim",
+	version = false,
 	dependencies = {
 		"williamboman/mason.nvim",
 		"zapling/mason-conform.nvim",

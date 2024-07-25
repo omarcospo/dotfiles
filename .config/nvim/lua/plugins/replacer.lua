@@ -1,6 +1,7 @@
 return {
 	{
 		"chrisgrieser/nvim-rip-substitute",
+		version = false,
 		cmd = "RipSubstitute",
 		opts = {
 			popupWin = {
@@ -21,6 +22,7 @@ return {
 	},
 	{
 		"MagicDuck/grug-far.nvim",
+		version = false,
 		keys = {
 			{
 				"<leader>r",

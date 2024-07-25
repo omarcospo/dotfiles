@@ -1,6 +1,7 @@
 return {
 	{
 		"kevinhwang91/nvim-ufo",
+		version = false,
 		event = { "VeryLazy" },
 		dependencies = { "kevinhwang91/promise-async" },
 		init = function()
@@ -44,7 +45,7 @@ return {
 	},
 	{
 		"domharries/foldnav.nvim",
-		version = "*",
+		version = false,
 		config = function()
 			vim.g.foldnav = { flash = { enabled = true } }
 		end,

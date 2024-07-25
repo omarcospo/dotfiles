@@ -1,5 +1,6 @@
 return {
 	"tzachar/highlight-undo.nvim",
+	version = false,
 	event = "VeryLazy",
 	opts = {
 		hlgroup = "CurSearch",

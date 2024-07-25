@@ -1,6 +1,7 @@
 return {
 	{
 		"echasnovski/mini.diff",
+		version = false,
 		opts = {
 			view = { style = "number" },
 			mappings = {
@@ -11,6 +12,7 @@ return {
 	},
 	{
 		"NeogitOrg/neogit",
+		version = false,
 		keys = {
 			{ "<leader>gg", "<CMD>Neogit<CR>" },
 			{ "<leader>gb", "<cmd>Telescope git_bcommits<cr>" },

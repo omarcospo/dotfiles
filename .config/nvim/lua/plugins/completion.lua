@@ -3,6 +3,7 @@ local border = { "┌", "─", "┐", "│", "┘", "─", "└", "│" }
 local highlight = "Normal:CmpPmenu,CursorLine:PmenuSel,Search:None"
 return {
 	"hrsh7th/nvim-cmp",
+	version = false,
 	event = "InsertEnter",
 	dependencies = {
 		"onsails/lspkind.nvim",
@@ -21,12 +22,12 @@ return {
 		local lspkind = require("lspkind")
 		require("cmp").setup({
 			sources = {
-				{ name = "snippy", group_index = 1 },
-				{ name = "nvim_lsp", group_index = 1 },
-				{ name = "buffer", keyword_length = 2 },
-				{ name = "async_path" },
-				{ name = "calc" },
-				{ name = "digraphs" },
+				{ name = "snippy", priority = 1, group_index = 1, max_item_count = 4 },
+				{ name = "nvim_lsp", priority = 2, max_item_count = 10 },
+				{ name = "buffer", priority = 1, keyword_length = 3, max_item_count = 3 },
+				{ name = "async_path", max_item_count = 6 },
+				{ name = "calc", max_item_count = 1 },
+				{ name = "digraphs", max_item_count = 2 },
 			},
 			formatting = {
 				fields = { "kind", "abbr", "menu" },

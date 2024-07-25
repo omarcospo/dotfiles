@@ -1,6 +1,7 @@
 return {
 	{
 		"is0n/fm-nvim",
+		version = false,
 		keys = {
 			{ "<Leader>ff", "<CMD>Lf<CR>" },
 		},

@@ -75,9 +75,9 @@ vim.opt.showmode = false
 --- Neovide
 vim.opt.linespace = 0
 if vim.g.neovide then
-	vim.opt.guifont = "IosevkaTerm_Nerd_Font:h15"
+	vim.opt.guifont = "Iosevka_Nerd_Font:h15"
 	vim.g.neovide_theme = "dark"
-	vim.g.neovide_fullscreen = true
+	-- vim.g.neovide_fullscreen = true
 
 	vim.g.neovide_cursor_trail_size = 0.4
 	vim.g.neovide_hide_mouse_when_typing = true
