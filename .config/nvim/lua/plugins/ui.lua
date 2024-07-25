@@ -1,5 +1,5 @@
 return {
   "stevearc/dressing.nvim",
-  event = "BufReadPost",
+  lazy = true,
   opts = {},
 }

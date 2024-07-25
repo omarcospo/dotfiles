@@ -1,6 +1,6 @@
 return {
 	"echasnovski/mini.bufremove",
-	event = "BufReadPost",
+	event = "VeryLazy",
 	config = function()
 		require("mini.bufremove").setup()
 		vim.keymap.set("n", "<leader>bk", function()

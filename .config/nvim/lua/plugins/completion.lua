@@ -21,12 +21,12 @@ return {
 		local lspkind = require("lspkind")
 		require("cmp").setup({
 			sources = {
-				{ name = "snippy", max_item_count = 5, priority = 11 },
-				{ name = "nvim_lsp", max_item_count = 6, priority = 10 },
-				{ name = "buffer", max_item_count = 4, priority = 8 },
-				{ name = "async_path", priority = 6 },
+				{ name = "snippy", group_index = 1 },
+				{ name = "nvim_lsp", group_index = 1 },
+				{ name = "buffer", keyword_length = 2 },
+				{ name = "async_path" },
 				{ name = "calc" },
-				{ name = "digraphs", max_item_count = 3 },
+				{ name = "digraphs" },
 			},
 			formatting = {
 				fields = { "kind", "abbr", "menu" },

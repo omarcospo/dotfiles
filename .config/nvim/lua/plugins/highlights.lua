@@ -1,7 +1,7 @@
 return {
 	"echasnovski/mini.hipatterns",
 	version = false,
-	-- event = "BufReadPost",
+	lazy = true,
 	config = function()
 		local hipatterns = require("mini.hipatterns")
 		hipatterns.setup({

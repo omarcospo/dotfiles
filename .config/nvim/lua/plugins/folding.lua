@@ -1,7 +1,7 @@
 return {
 	{
 		"kevinhwang91/nvim-ufo",
-		event = { "User BaseFile" },
+		event = { "VeryLazy" },
 		dependencies = { "kevinhwang91/promise-async" },
 		init = function()
 			vim.opt.foldenable = true -- Enable fold for nvim-ufo.

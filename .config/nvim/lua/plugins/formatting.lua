@@ -1,6 +1,5 @@
 return {
 	"stevearc/conform.nvim",
-	event = "BufReadPost",
 	dependencies = {
 		"williamboman/mason.nvim",
 		"zapling/mason-conform.nvim",

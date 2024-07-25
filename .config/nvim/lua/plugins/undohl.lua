@@ -1,6 +1,6 @@
 return {
 	"tzachar/highlight-undo.nvim",
-	event = "User BaseDefered",
+	event = "VeryLazy",
 	opts = {
 		hlgroup = "CurSearch",
 		duration = 150,
