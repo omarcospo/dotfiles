@@ -15,7 +15,6 @@ set cursorpreviewfmt "\033[7;2m"
 
 # Better defaults
 map . :set hidden!
-map i :set preview!
 map <c-q> :quit
 map c
 map cc clear
@@ -33,7 +32,9 @@ map go cd ~/Documentos
 map gp cd ~/Coding
 map gm cd ~/MEGA
 
-# Delete
+cmd preview ${{ bat --theme "base16" --paging=always "$fx" }}
+map i :preview
+
 cmd copy_to_clipboard ${{
     printf '%s' "$fx" | wl-copy
 }}
@@ -53,7 +54,6 @@ cmd trash-multi ${{
    	printf '%s' "$res" | xargs -I {} rm -rf {} || echo "ERROR: Not deleting"
 }}
 
-# Extract
 map ze extract
 cmd extract ${{
   set -f
@@ -67,17 +67,14 @@ cmd extract ${{
   esac
 }}
 
-# Zipper
 map zz zip
 cmd zip ${{
     set -f
    	printf '%s' "$fx" | atool --add $f.7z
 }}
 
-# Paste
 map p : paste; clear
 
-# Bulkrename
 cmd bulkrename ${{
     tmpfile_old="$(mktemp)"
     tmpfile_new="$(mktemp)"
@@ -99,7 +96,6 @@ cmd bulkrename ${{
     lf -remote "send $id unselect"
 }}
 
-# Finder
 cmd fzf_jump ${{
     res="$(fd . -d 1 -H --exclude '.git' | fzf --bind=ctrl-f:accept,ctrl-h:backward-delete-char --preview "fzf_preview {}" --color=bg+:-1,gutter:-1 --reverse --border --header='Jump to location')"
     if [ -n "$res" ]; then
@@ -110,7 +106,6 @@ cmd fzf_jump ${{
 }}
 map f :fzf_jump
 
-# Recursive Finder
 cmd fzf_recursive ${{
     res="$(fd . -d 4 -H --exclude '.git' | fzf --bind=ctrl-f:accept,ctrl-h:backward-delete-char --preview "fzf_preview {}" --color=bg+:-1,gutter:-1 --reverse --border --header='Jump to location')"
     if [ -n "$res" ]; then
@@ -141,7 +136,6 @@ cmd mkdir %{{
     lf -remote "send $id select \"$*\""
 }}
 
-#Git integration
 cmd on-cd &{{
   # Get the latest commit info
   if [ -d .git ] || [ -f .git ]; then
@@ -160,20 +154,15 @@ cmd create-file %{{
 }}
 map cf :create-file
 
-#Create go project
 cmd create-go %{{
   printf "Project name: "
   read project_name
   mkdir "$project_name"
 
   go_version=$(go version | cut -d " " -f 3 | sed "s/go/go /g")
-
   printf "module $project_name\n\n$go_version" >> "$project_name"/go.mod
-
   printf "package main\n\n" >> "$project_name"/main.go
-
   printf "import (\n\t\"fmt\"\n)\n\n" >> "$project_name"/main.go
-
   printf "func main() {\n\tfmt.Println(\"Hello World!\")\n}" >> "$project_name"/main.go
 }}
 
