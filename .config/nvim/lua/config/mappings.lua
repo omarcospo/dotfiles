@@ -1,6 +1,3 @@
----- Set <localleader> key to <n>
-vim.keymap.set("n", "j", "v:count == 0 ? 'gj' : 'j'", { expr = true })
-vim.keymap.set("n", "k", "v:count == 0 ? 'gk' : 'k'", { expr = true })
 ---- Window
 vim.keymap.set("n", "<leader>wh", "<C-w><C-h>")
 vim.keymap.set("n", "<leader>wl", "<C-w><C-l>")
