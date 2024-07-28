@@ -6,7 +6,6 @@ return {
 		dependencies = {
 			{ "williamboman/mason.nvim", config = true },
 			{ "williamboman/mason-lspconfig.nvim", version = false },
-			{ "zeioth/garbage-day.nvim" },
 			{ "LukasPietzschmann/boo.nvim" },
 		},
 		init = function()
@@ -22,14 +21,6 @@ return {
 				close_events = { "CursorMoved", "BufHidden", "InsertCharPre" },
 			})
 			vim.keymap.set("n", "gd", "<cmd>lua require('boo').boo()<CR>")
-			require("garbage-day").setup({
-				aggressive_mode = false,
-				grace_period = (60 * 15),
-				wakeup_delay = 3000,
-				notifications = false,
-				retries = 3,
-				timeout = 1000,
-			})
 			vim.diagnostic.config({
 				signs = {
 					text = {
@@ -94,7 +85,7 @@ return {
 			}
 
 			local capabilities = vim.lsp.protocol.make_client_capabilities()
-			capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
+			-- capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
 
 			local mason_lspconfig = require("mason-lspconfig")
 

@@ -39,6 +39,8 @@ vq() {
   NVIM_APPNAME=$(basename $config) nvim $@
 }
 
+yt-audio() { yt-dlp -x --audio-format mp3 --audio-quality 0 --output "%(artist)s - %(title)s.%(ext)s" "$@" }
+
 ###### --------------------------------------
 if [[ $- != *i* ]]; then
     return

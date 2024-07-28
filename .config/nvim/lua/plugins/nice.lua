@@ -16,6 +16,7 @@ return {
 			max_height = 5,
 			render = "wrapped-compact",
 			stages = "static",
+			timeout = 1000,
 		},
 		config = function(_, opts)
 			local notify = require("notify")

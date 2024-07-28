@@ -27,17 +27,6 @@
    '(default ((t (:background "#1C1E1F"))))
    '(window-divider ((t (:foreground "#3D4043"))))))
 
-(use-package mini-modeline
-  :config
-  (setq mode-line '((:eval (cond (buffer-read-only (propertize "NO@" 'face '(:inherit font-lock-warning-face)))
-		                             ((buffer-modified-p) (propertize "!" 'face '(:inherit font-lock-warning-face)))))
-	                  (:eval (propertize " L%l:C%c " 'face '(:inherit font-lock-doc-face :height 160)))
-	                  (:eval (propertize (symbol-name major-mode) 'face '(:inherit font-lock-keyword-face :height 160)))))
-  (setq mini-modeline-enhance-visual t)
-  (setq mini-modeline-r-format mode-line)
-  (setq mini-modeline-display-gui-line nil)
-  (mini-modeline-mode))
-
 ;; evil
 (use-package general)
 
@@ -150,87 +139,6 @@
   "C-h" 'delete-backward-char
   "C-q" 'evil-normal-state)
 
-;; lsp
-(use-package eglot
-  :ensure nil
-  :custom
-  (eglot-autoshutdown t)
-  (eglot-report-progress nil)
-  (eglot-events-buffer-size 0)
-  (eglot-send-changes-idle-time 0.1)
-  (eglot-extend-to-xref t)
-  :config
-  (fset #'jsonrpc--log-event #'ignore)
-  :general
-  (:keymaps 'eglot-mode-map
-            :states '(normal visual operator motion)
-            "gf" 'consult-outline
-            "ga" 'eglot-code-actions
-            "gs" 'xref-find-definitions
-            "gr" 'eglot-rename))
-
-(use-package consult-eglot)
-
-(use-package eldoc-box
-  :custom
-  (eldoc-box-only-multi-line t)
-  (eldoc-echo-area-use-multiline-p nil)
-  :general
-  (:keymaps 'eglot-mode-map
-            :states '(normal visual operator motion)
-            "ge" 'eldoc-box-help-at-point))
-
-(use-package devdocs
-  :config
-  (set-face-attribute 'shr-text nil :height 160 :weight 'regular)
-  (set-face-attribute 'shr-code nil :height 160 :weight 'regular)
-  (set-face-attribute 'devdocs-code-block nil :height 160 :weight 'regular)
-  :general
-  (:keymaps 'override
-            :states '(normal visual operator motion)
-            "gd" 'devdocs-lookup))
-
-(use-package flymake-diagnostic-at-point
-  :after flymake
-  :hook (prog-mode . flymake-mode)
-  :hook (flymake-mode . flymake-diagnostic-at-point-mode)
-  :custom
-  (flymake-no-changes-timeout 0.1)
-  (flymake-diagnostic-at-point-timer-delay 0.1)
-  :config
-  (local "e" 'consult-flymake))
-
-;; go
-(use-package go-mode
-  :mode "\\.go\\'"
-  :hook (go-mode . eglot-ensure)
-  :custom
-  (gofmt-command "gofumpt")
-  :config
-  (add-hook 'before-save-hook 'gofmt-before-save)
-  (defun go-mode-setup ()
-    (setq-local compile-command "go build -v && go test -v && go vet"))
-  (add-hook 'go-mode-hook 'go-mode-setup)
-  (with-eval-after-load 'eglot
-    (add-to-list
-     'eglot-server-programs
-     '((go-mode go-ts-mode) .
-       ("gopls"
-        :initializationOptions
-        (:hints (
-                 :parameterNames t
-                 :rangeVariableTypes t
-                 :functionTypeParameters t
-                 :assignVariableTypes t
-                 :compositeLiteralFields t
-                 :compositeLiteralTypes t
-                 :constantValues t)))))))
-
-(local
-  :keymaps 'emacs-lisp-mode-map
-  "l" 'eval-last-sexp
-  "d" 'eval-defun)
-
 ;; completion hard
 
 (use-package yasnippet
@@ -328,14 +236,6 @@
   (:keymaps 'override
             :states '(normal visual operator motion)
             "f" 'consult-line))
-
-(use-package consult-omni
-  :straight (consult-omni :type git :host github :repo "armindarvish/consult-omni" :branch "main" :files (:defaults "sources/*.el"))
-  :after consult
-  :config
-  (require 'consult-omni-sources)
-  (require 'consult-omni-wikipedia)
-  (require 'consult-omni-apps))
 
 (use-package evil-nerd-commenter
   :general
@@ -615,11 +515,11 @@
   :straight org-appear
   :straight '(ox-typst :host github :repo "jmpunkt/ox-typst")
   :hook (org-mode . org-appear-mode)
+  :hook (org-mode . org-indent-mode)
   :config
   (font-lock-add-keywords
    'org-mode
-   '(
-     ;; Replace lists "-" and "+" with unicode characters
+   '(;; Replace lists "-" and "+" with unicode characters
      ("^ *\\([-]\\) " (0 (prog1 () (compose-region (match-beginning 1) (match-end 1) "•"))))
      ("^ *\\([+]\\) " (0 (prog1 () (compose-region (match-beginning 1) (match-end 1) "◦"))))
      ;; Turn page break in pretty horizontal lines
@@ -627,13 +527,12 @@
      ;; Hide heading leading stars
      ("^\\*+ " (0 (prog1 nil (put-text-property (match-beginning 0)
 						                                    (match-end 0) 'face
-						                                    (list :foreground (face-attribute 'default :background))))))
-     ))
+						                                    (list :foreground (face-attribute 'default :background))))))))
   (defface org-horizontal-rule
     '((default :inherit org-hide) (((background light)) :strike-through "gray70") (t :strike-through "gray30"))
     "Face used for horizontal ruler.")
   (dolist (languages
-           '(ob-shell ob-emacs-lisp ob-lua ob-gnuplot ox-typst
+           '(ob-shell ob-emacs-lisp ob-lua ob-gnuplot ox-typst ob-python
                       ob-dot ob-calc org-tempo))
     (require languages))
   (add-to-list 'org-babel-after-execute-hook 'org-redisplay-inline-images)

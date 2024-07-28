@@ -115,7 +115,18 @@
  native-comp-deferred-compilation t
  package-native-compile t
  warning-minimum-level :emergency
+ mode-line-format 
+ (list 
+  ;; modified
+  '(:eval (cond (buffer-read-only (propertize " NO@" 'face '(:inherit font-lock-warning-face)))
+                ((buffer-modified-p) (propertize "  " 'face '(:inherit font-lock-warning-face)))))
+  " %b " ;; buffer name
+  ;; git branch
+  '(:eval (when-let (vc vc-mode)
+            (list " " (propertize (format " %s" (substring vc 5)) 'face 'font-lock-comment-face) " ")))
+  )
  )
+
 (global-auto-revert-mode)
 (window-divider-mode)
 (pixel-scroll-precision-mode)
