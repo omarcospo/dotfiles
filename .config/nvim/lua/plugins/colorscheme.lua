@@ -18,6 +18,7 @@ return {
 	},
 	{
 		"xiyaowong/transparent.nvim",
+		cond = not vim.g.neovide,
 		config = function()
 			require("transparent").setup({
 				groups = {
@@ -52,6 +53,14 @@ return {
 				},
 				extra_groups = {},
 				exclude_groups = {},
+			})
+		end,
+	},
+	{
+		"dstein64/nvim-scrollview",
+		config = function()
+			require("scrollview").setup({
+				scrollview_floating_windows = true,
 			})
 		end,
 	},
