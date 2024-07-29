@@ -586,5 +586,14 @@
   (org-agenda-span 'day)
   (org-agenda-inhibit-startup t))
 
+;; python
+(use-package python-mode
+  :mode ("\\.py\\'" . python-ts-mode)
+  ;; :hook (python-ts-mode . eglot-ensure)
+  :custom
+  (python-shell-interpreter "~/.local/python/bin/python")
+  (org-babel-python-command "~/.local/python/bin/python")
+  )
+
 (savehist-mode 1)
 (recentf-mode 1)

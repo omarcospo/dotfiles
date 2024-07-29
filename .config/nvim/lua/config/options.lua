@@ -120,5 +120,5 @@ vim.opt.selection = "old"
 vim.o.timeoutlen = 500
 ---- Set <leader> key to <SPACE>
 vim.g.mapleader = " "
-vim.g.maplocalleader = " "
+vim.g.maplocalleader = "n"
 vim.filetype.add({ filename = { [".zshrc"] = "sh", ["config"] = "json" } })
