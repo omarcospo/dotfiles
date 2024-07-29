@@ -17,7 +17,9 @@ export XDG_CONFIG_HOME="$HOME"/.config
 export GOPATH="$XDG_DATA_HOME"/go
 export PATH="$GOPATH/bin:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
+export PATH="$HOME/.local/node_modules/.bin:$PATH"
 export PATH="$XDG_DATA_HOME/nvim/mason/bin:$PATH"
+export PATH="$HOME/.local/minecraft-server:$PATH"
 
 # FZF
 FUZZY_OPTS="--color=bg+:-1,gutter:-1 --reverse --border --bind ctrl-f:accept,ctrl-h:backward-delete-char"
