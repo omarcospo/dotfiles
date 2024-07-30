@@ -1,0 +1,9 @@
+-f "bestvideo[height<=1440]+bestaudio/best[height<=1440]"
+--write-subs
+--write-sub
+--write-auto-sub
+--sub-lang en
+--add-metadata
+--embed-thumbnail
+--ignore-errors
+-o "(%(uploader)s) %(title)s.%(ext)s"
