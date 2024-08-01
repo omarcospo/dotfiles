@@ -34,6 +34,7 @@
     "extensions.experimental.affinity": {
         "asvetliakov.vscode-neovim": 1
     },
+    "vscode-neovim.neovimExecutablePaths.linux": "/home/marcos/.local/share/bob/nvim-bin/nvim",
     // "breadcrumbs.filePath": "off",
     // "breadcrumbs.showNumbers": false,
     // "debug.console.fontSize": 15,

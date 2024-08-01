@@ -8,9 +8,6 @@ alias qq='clear'
 alias eq='exit'
 alias npmi='cd ~/.local && npm install'
 
-# Software
-export SUDO_EDITOR=/usr/bin/nvim
-export EDITOR=/usr/bin/nvim
 # Paths
 export XDG_DATA_HOME="$HOME"/.local/share
 export XDG_CONFIG_HOME="$HOME"/.config
@@ -20,6 +17,11 @@ export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOME/.local/node_modules/.bin:$PATH"
 export PATH="$XDG_DATA_HOME/nvim/mason/bin:$PATH"
 export PATH="$HOME/.local/minecraft-server:$PATH"
+export PATH="$HOME/.local/share/bob/nvim-bin:$PATH"
+
+# Software
+export EDITOR="$XDG_DATA_HOME"/bob/nightly/nvim-linux64/bin/nvim
+export SUDO_EDITOR="$EDITOR"
 
 # FZF
 FUZZY_OPTS="--color=bg+:-1,gutter:-1 --reverse --border --bind ctrl-f:accept,ctrl-h:backward-delete-char"
