@@ -2,9 +2,6 @@ local function run_cmd(cmd, show_error)
 	if type(cmd) == "string" then
 		cmd = vim.split(cmd, " ")
 	end
-	if vim.fn.has("win32") == 1 then
-		cmd = vim.list_extend({ "cmd.exe", "/C" }, cmd)
-	end
 	local result = vim.fn.system(cmd)
 	local success = vim.api.nvim_get_vvar("shell_error") == 0
 	if not success and (show_error == nil or show_error) then

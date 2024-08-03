@@ -189,8 +189,6 @@ return {
 		event = "LspAttach",
 		cmd = "Trouble",
 		keys = {
-			-- { "gt", "<CMD>Trouble diagnostics toggle filter.buf=0 focus=true<CR>" },
-			-- { "gs", "<CMD>Trouble lsp_references toggle focus=true<CR>" },
 			{ "tt", "<CMD>Trouble lsp_document_symbols toggle focus=false win.position=left filter.buf=0<CR>" },
 		},
 		opts = {

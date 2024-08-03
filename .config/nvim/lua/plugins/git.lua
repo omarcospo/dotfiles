@@ -10,6 +10,7 @@ return {
 			},
 		},
 	},
+	{ "sindrets/diffview.nvim" },
 	{
 		"NeogitOrg/neogit",
 		version = false,

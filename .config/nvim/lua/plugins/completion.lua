@@ -14,7 +14,6 @@ return {
 		"dcampos/cmp-snippy",
 		"hrsh7th/cmp-nvim-lsp",
 		"hrsh7th/cmp-calc",
-		"dmitmel/cmp-digraphs",
 	},
 	config = function()
 		local cmp = require("cmp")
@@ -27,7 +26,6 @@ return {
 				{ name = "buffer", priority = 1, keyword_length = 3, max_item_count = 3 },
 				{ name = "async_path", max_item_count = 6 },
 				{ name = "calc", max_item_count = 1 },
-				{ name = "digraphs", max_item_count = 2 },
 			},
 			formatting = {
 				fields = { "kind", "abbr", "menu" },
@@ -71,6 +69,11 @@ return {
 					end
 				end, { "i", "s" }),
 			}),
+			experimental = {
+				ghost_text = {
+					hl_group = "Comment",
+				},
+			},
 		})
 	end,
 }

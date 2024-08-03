@@ -41,11 +41,4 @@ return {
 			treesitter.setup({ ensure_installed = filetypes })
 		end,
 	},
-	{
-		"nvim-orgmode/orgmode",
-		ft = { "org" },
-		config = function()
-			require("orgmode").setup({})
-		end,
-	},
 }

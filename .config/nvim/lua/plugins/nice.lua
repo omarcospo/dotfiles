@@ -25,6 +25,12 @@ return {
 		end,
 	},
 	{
+		"stevearc/dressing.nvim",
+		version = false,
+		lazy = true,
+		opts = {},
+	},
+	{
 		"folke/noice.nvim",
 		version = false,
 		event = "VeryLazy",
