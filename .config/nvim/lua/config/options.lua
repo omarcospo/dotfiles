@@ -1,6 +1,5 @@
 vim.opt.title = true
 vim.opt.cmdheight = 0
-vim.opt.laststatus = 0
 vim.opt.showcmd = false
 vim.opt.ruler = false
 vim.opt.inccommand = "split"
@@ -33,7 +32,6 @@ vim.opt.expandtab = true
 vim.opt.smartcase = true
 vim.opt.smartindent = true
 vim.opt.preserveindent = true
---- Status Line
 --- Copy/Paste
 vim.opt.clipboard = "unnamedplus"
 vim.opt.copyindent = true
@@ -57,8 +55,8 @@ vim.opt.fillchars = {
 	foldsep = " ",
 	diff = "╱",
 	eob = " ",
-	stl = "─",
-	stlnc = "─",
+	-- stl = "─",
+	-- stlnc = "─",
 }
 vim.opt.listchars = { tab = "» ", trail = "·", nbsp = "␣" }
 --- Line Numbers
