@@ -26,7 +26,7 @@ return {
 			},
 			formatters_by_ft = {
 				lua = { "stylua" },
-				-- python = { "ruff_format" },
+				python = { "black" },
 				html = { "prettier" },
 				typescript = { "biome" },
 				javascript = { "biome" },

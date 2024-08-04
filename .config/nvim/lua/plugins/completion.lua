@@ -69,11 +69,6 @@ return {
 					end
 				end, { "i", "s" }),
 			}),
-			experimental = {
-				ghost_text = {
-					hl_group = "Comment",
-				},
-			},
 		})
 	end,
 }
