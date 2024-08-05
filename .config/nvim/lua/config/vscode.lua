@@ -10,11 +10,10 @@ vim.opt.preserveindent = true
 vim.opt.clipboard = "unnamedplus"
 vim.opt.copyindent = true
 vim.opt.virtualedit = "block"
-
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 local function map(mode, key, action)
-  vim.keymap.set(mode, key, ":call VSCodeNotify('" .. action .. "')<CR>")
+	vim.keymap.set(mode, key, ":call VSCodeNotify('" .. action .. "')<CR>")
 end
 map("n", "<leader><leader>", "workbench.action.showCommands")
 --- File
@@ -31,6 +30,3 @@ vim.keymap.set("n", "<C-j>", "<cmd>m .+1<cr>==")
 vim.keymap.set("n", "<C-k>", "<cmd>m .-2<cr>==")
 vim.keymap.set("v", "<C-j>", ":m '>+1<cr>gv=gv")
 vim.keymap.set("v", "<C-k>", ":m '<-2<cr>gv=gv")
-
-vim.keymap.set("n", "j", "v:count == 0 ? 'gj' : 'j'", { expr = true })
-vim.keymap.set("n", "k", "v:count == 0 ? 'gk' : 'k'", { expr = true })
