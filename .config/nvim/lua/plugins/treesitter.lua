@@ -36,6 +36,7 @@ return {
 				"yaml",
 				"typst",
 				"org",
+				"hyprlang",
 			}
 			---@diagnostic disable-next-line
 			treesitter.setup({ ensure_installed = filetypes })

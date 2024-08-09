@@ -5,7 +5,7 @@
     "editor.fontSize": 17,
     // Theming
     "workbench.iconTheme": "material-icon-theme",
-    "workbench.colorTheme": "Gruvbox Dark Hard",
+    "workbench.colorTheme": "Moegi Dark Vitesse",
     "workbench.productIconTheme": "material-product-icons",
     // Minimal
     "workbench.editor.showTabs": "single",
@@ -30,7 +30,7 @@
     "notebook.consolidatedOutputButton": false,
     "notebook.showFoldingControls": "always",
     "notebook.stickyScroll.enabled": true,
-    "jupyter.themeMatplotlibPlots": true,
+    "jupyter.themeMatplotlibPlots": false,
     "extensions.experimental.affinity": {
         "asvetliakov.vscode-neovim": 1
     },
@@ -38,4 +38,6 @@
     "security.workspace.trust.untrustedFiles": "open",
     "workbench.statusBar.visible": false,
     "workbench.activityBar.location": "hidden",
+    "breadcrumbs.enabled": false,
+    "notebook.lineNumbers": "on",
 }
