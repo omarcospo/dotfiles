@@ -80,6 +80,7 @@ return {
 						timeout_ms = nil,
 					},
 				},
+				svelte = {},
 				tsserver = {},
 				html = {},
 			}

@@ -37,9 +37,17 @@ return {
 				"typst",
 				"org",
 				"hyprlang",
+				"svelte",
 			}
 			---@diagnostic disable-next-line
-			treesitter.setup({ ensure_installed = filetypes })
+			treesitter.setup({
+				ensure_installed = filetypes,
+				sync_install = false,
+				highlight = {
+					enable = true,
+					additional_vim_regex_highlighting = false,
+				},
+			})
 		end,
 	},
 }
