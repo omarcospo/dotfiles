@@ -2,10 +2,10 @@
     // Font
     "editor.fontFamily": "'Iosevka Nerd Font'",
     "debug.console.fontFamily": "Iosevka Nerd Font",
-    "editor.fontSize": 17,
+    "editor.fontSize": 19,
     // Theming
     "workbench.iconTheme": "material-icon-theme",
-    "workbench.colorTheme": "Moegi Dark Vitesse",
+    "workbench.colorTheme": "One Dark Pro Darker",
     "workbench.productIconTheme": "material-product-icons",
     // Minimal
     "workbench.editor.showTabs": "single",
@@ -40,4 +40,5 @@
     "workbench.activityBar.location": "hidden",
     "breadcrumbs.enabled": false,
     "notebook.lineNumbers": "on",
+    "notebook.markup.fontSize": 20,
 }
