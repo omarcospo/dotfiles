@@ -9,7 +9,7 @@ return {
 		require("conform").setup({
 			format_on_save = {
 				timeout_ms = 200,
-				lsp_fallback = false,
+				lsp_fallback = true,
 			},
 			formatters = {
 				gofumpt = {
@@ -40,5 +40,12 @@ return {
 			},
 		})
 		require("mason-conform").setup()
+		-- Create an autocmd for Svelte files
+		vim.api.nvim_create_autocmd("BufWritePre", {
+			pattern = "*.svelte",
+			callback = function()
+				vim.cmd("silent !prettier --plugin prettier-plugin-svelte --write " .. vim.fn.expand("%"))
+			end,
+		})
 	end,
 }

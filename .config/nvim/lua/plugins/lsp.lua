@@ -2,7 +2,6 @@ return {
 	{
 		"neovim/nvim-lspconfig",
 		version = false,
-		ft = { "python", "go", "typescript", "lua", "javascript" },
 		dependencies = {
 			{ "williamboman/mason.nvim", config = true },
 			{ "williamboman/mason-lspconfig.nvim", version = false },
