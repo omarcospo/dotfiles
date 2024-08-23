@@ -16,8 +16,7 @@ unmap_prefix("n")
 unmap_prefix("<C-g>")
 unmap_prefix("t")
 
--- Unbind the macro recording keys in all modes
-local modes = { "n", "v", "x", "s", "o", "c" }
+local modes = { "n", "v", "x", "s", "o" }
 for _, mode in ipairs(modes) do
 	vim.keymap.set(mode, "q", "<Nop>", { noremap = true })
 	vim.keymap.set(mode, "Q", "<Nop>", { noremap = true })

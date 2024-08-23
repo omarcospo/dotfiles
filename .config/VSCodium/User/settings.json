@@ -8,10 +8,13 @@
     "workbench.colorTheme": "One Dark Pro Darker",
     "workbench.productIconTheme": "material-product-icons",
     // Minimal
-    "workbench.editor.showTabs": "single",
     "editor.minimap.enabled": false,
     "workbench.editor.showIcons": false,
-    "window.titleBarStyle": "custom",
+    "window.titleBarStyle": "native",
+    "window.menuBarVisibility": "hidden",
+    "workbench.statusBar.visible": false,
+    "workbench.activityBar.location": "default",
+    "breadcrumbs.enabled": false,
     // Terminal
     "terminal.external.linuxExec": "alacritty",
     // Generic
@@ -36,9 +39,8 @@
     },
     "vscode-neovim.neovimExecutablePaths.linux": "/home/marcos/.local/share/bob/nvim-bin/nvim",
     "security.workspace.trust.untrustedFiles": "open",
-    "workbench.statusBar.visible": false,
-    "workbench.activityBar.location": "hidden",
-    "breadcrumbs.enabled": false,
     "notebook.lineNumbers": "on",
     "notebook.markup.fontSize": 20,
+    "git.openRepositoryInParentFolders": "always",
+    "jupyter.askForKernelRestart": false,
 }
