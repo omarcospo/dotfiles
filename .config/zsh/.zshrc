@@ -17,7 +17,7 @@ export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOME/.local/node_modules/.bin:$PATH"
 export PATH="$XDG_DATA_HOME/nvim/mason/bin:$PATH"
 export PATH="$HOME/.local/minecraft-server:$PATH"
-export PATH="$HOME/.local/share/bob/nvim-bin:$PATH"
+export PATH="$HOME/.local/share/bob/nightly/bin:$PATH"
 
 # Software
 export EDITOR="$XDG_DATA_HOME"/bob/nightly/nvim-linux64/bin/nvim
