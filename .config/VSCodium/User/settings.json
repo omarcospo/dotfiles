@@ -10,7 +10,7 @@
     // Minimal
     "editor.minimap.enabled": false,
     "workbench.editor.showIcons": false,
-    "window.titleBarStyle": "native",
+    "window.titleBarStyle": "custom",
     "window.menuBarVisibility": "hidden",
     "workbench.statusBar.visible": false,
     "workbench.activityBar.location": "default",
@@ -37,10 +37,11 @@
     "extensions.experimental.affinity": {
         "asvetliakov.vscode-neovim": 1
     },
-    "vscode-neovim.neovimExecutablePaths.linux": "/home/marcos/.local/share/bob/nvim-bin/nvim",
+    "vscode-neovim.neovimExecutablePaths.linux": "/home/marcos/.local/share/bob/nightly/bin/nvim",
     "security.workspace.trust.untrustedFiles": "open",
     "notebook.lineNumbers": "on",
     "notebook.markup.fontSize": 20,
     "git.openRepositoryInParentFolders": "always",
     "jupyter.askForKernelRestart": false,
+    "vscode-neovim.statusLineSeparator": "",
 }
