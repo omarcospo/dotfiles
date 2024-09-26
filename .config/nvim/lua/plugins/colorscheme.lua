@@ -1,12 +1,19 @@
 return {
 	{
-		"0xstepit/flow.nvim",
-		lazy = false,
+		"ellisonleao/gruvbox.nvim",
 		priority = 1000,
-		opts = {},
 		config = function()
-			require("flow").setup({})
-			vim.cmd.colorscheme("flow")
+			require("gruvbox").setup({
+				overrides = {
+					StatusLine = { bg = "#151515" },
+					NormalFloat = { bg = "NONE" },
+					FloatBorder = { bg = "NONE" },
+					WinSeparator = { bg = "NONE" },
+					SignColumn = { bg = "NONE" },
+				},
+				dim_inactive = false,
+			})
+			vim.cmd("colorscheme gruvbox")
 		end,
 	},
 }
