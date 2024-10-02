@@ -80,7 +80,7 @@ return {
 					},
 				},
 				svelte = {},
-				tsserver = {},
+				ts_ls = {},
 				html = {},
 			}
 

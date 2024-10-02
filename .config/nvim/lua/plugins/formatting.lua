@@ -8,7 +8,7 @@ return {
 	config = function()
 		require("conform").setup({
 			format_on_save = {
-				timeout_ms = 200,
+				timeout_ms = 500000,
 				lsp_fallback = true,
 			},
 			formatters = {
@@ -23,11 +23,32 @@ return {
 					args = { "$FILENAME" },
 					stdin = false,
 				},
+				djlint = {
+					inherit = false,
+					command = "djlint",
+					args = {
+						"--reformat",
+						"--format-css",
+						"--format-js",
+						--"--indent-css",
+						--"1",
+						--"--indent-js",
+						--"1",
+						"--max-line-length",
+						"80",
+						"--indent",
+						"0",
+						-- "--quiet",
+						"$FILENAME",
+					},
+					stdin = false,
+				},
 			},
 			formatters_by_ft = {
 				lua = { "stylua" },
 				python = { "black" },
 				html = { "prettier" },
+				htmldjango = { "djlint" },
 				typescript = { "biome" },
 				javascript = { "biome" },
 				json = { "biome" },

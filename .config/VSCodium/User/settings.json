@@ -12,7 +12,6 @@
     "workbench.editor.showIcons": false,
     "window.titleBarStyle": "custom",
     "window.menuBarVisibility": "hidden",
-    "workbench.statusBar.visible": false,
     "workbench.activityBar.location": "default",
     "breadcrumbs.enabled": false,
     // Terminal
@@ -44,4 +43,7 @@
     "git.openRepositoryInParentFolders": "always",
     "jupyter.askForKernelRestart": false,
     "vscode-neovim.statusLineSeparator": "",
+    "[html]": {
+        "editor.suggest.insertMode": "replace"
+    },
 }
