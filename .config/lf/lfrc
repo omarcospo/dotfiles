@@ -28,9 +28,10 @@ map gr cd /
 map gd cd ~/Downloads
 map gn cd ~/.config/nvim/lua/plugins
 map gi cd ~/Pictures
-map go cd ~/Documentos
+map go cd ~/Documents
 map gp cd ~/Projetos
 map gv cd ~/Videos
+map gm cd ~/MEGA
 
 cmd preview ${{
   [ -d "$fx" ] || bat --theme "base16" --paging=always "$fx"
