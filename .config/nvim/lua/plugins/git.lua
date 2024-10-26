@@ -16,9 +16,6 @@ return {
 		version = false,
 		keys = {
 			{ "<leader>gg", "<CMD>Neogit<CR>" },
-			{ "<leader>gb", "<cmd>Telescope git_bcommits<cr>" },
-			{ "<leader>gl", "<cmd>Telescope git_commits<cr>" },
-			{ "<leader>fg", "<cmd>Telescope git_files<cr>" },
 		},
 		config = function()
 			require("neogit").setup({
