@@ -22,6 +22,9 @@ return {
 					["<C-u>"] = "preview-page-up",
 				},
 			},
+			keymaps = {
+				winopts = { preview = { vertical = "down:5%" } },
+			},
 		})
 		vim.keymap.set("n", "s", "<cmd>FzfLua blines<CR>", { silent = true })
 		vim.keymap.set("n", "<leader>bb", "<cmd>FzfLua buffers<CR>", { silent = true })
