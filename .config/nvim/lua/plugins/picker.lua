@@ -27,7 +27,8 @@ return {
 		vim.keymap.set("n", "<leader>bb", "<cmd>FzfLua buffers<CR>", { silent = true })
 		vim.keymap.set("n", "<leader>a", "<cmd>FzfLua lgrep_curbuf<CR>", { silent = true })
 		vim.keymap.set("n", "<leader>s", "<cmd>FzfLua live_grep<CR>", { silent = true })
-		vim.keymap.set("n", "<leader>h", "<cmd>FzfLua helptags<CR>", { silent = true })
+		vim.keymap.set("n", "<leader>hh", "<cmd>FzfLua helptags<CR>", { silent = true })
+		vim.keymap.set("n", "<leader>hk", "<cmd>FzfLua keymaps<CR>", { silent = true })
 		vim.keymap.set("n", "<leader>fr", "<cmd>FzfLua oldfiles<CR>", { silent = true })
 	end,
 }
