@@ -3,22 +3,9 @@ return {
 		"neovim/nvim-lspconfig",
 		version = false,
 		dependencies = {
-			{ "williamboman/mason.nvim", config = true },
-			{ "williamboman/mason-lspconfig.nvim", version = false },
 			{ "LukasPietzschmann/boo.nvim" },
 		},
 		init = function()
-			local lsp = vim.lsp
-			lsp.handlers["$/progress"] = function() end
-			lsp.handlers["window/logMessage"] = function() end
-			lsp.handlers["window/showMessage"] = function() end
-			vim.keymap.set("i", "<c-s>", function()
-				vim.lsp.buf.signature_help()
-			end, { buffer = true })
-			vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers["signature_help"], {
-				border = "single",
-				close_events = { "CursorMoved", "BufHidden", "InsertCharPre" },
-			})
 			vim.keymap.set("n", "gd", "<cmd>lua require('boo').boo()<CR>")
 			vim.diagnostic.config({
 				signs = {
@@ -32,125 +19,15 @@ return {
 			})
 		end,
 		config = function()
-			local servers = {
-				lua_ls = {
-					Lua = {
-						workspace = { checkThirdParty = false },
-						telemetry = { enable = false },
-					},
-				},
-				gopls = {
-					gopls = {
-						gofumpt = true,
-						usePlaceholders = true,
-						analyses = {
-							fieldalignment = false,
-							nilness = true,
-							unusedparams = true,
-							unusedwrite = true,
-							useany = true,
-						},
-						codelenses = {
-							gc_details = false,
-							generate = true,
-							regenerate_cgo = true,
-							run_govulncheck = true,
-							test = true,
-							tidy = true,
-							upgrade_dependency = true,
-							vendor = true,
-						},
-						hints = {
-							rangeVariableTypes = true,
-							parameterNames = false,
-							constantValues = true,
-							assignVariableTypes = true,
-							compositeLiteralFields = true,
-							compositeLiteralTypes = true,
-							functionTypeParameters = true,
-						},
-					},
-				},
-				jedi_language_server = {},
-				typst_lsp = {
-					exportPdf = "onType",
-					format = {
-						formatting_options = nil,
-						timeout_ms = nil,
-					},
-				},
-				svelte = {},
-				ts_ls = {},
-				html = {},
-			}
-
-			local capabilities = vim.lsp.protocol.make_client_capabilities()
-
-			local mason_lspconfig = require("mason-lspconfig")
-
-			mason_lspconfig.setup({
-				ensure_installed = vim.tbl_keys(servers),
-			})
-			mason_lspconfig.setup_handlers({
-				function(server_name)
-					require("lspconfig")[server_name].setup({
-						capabilities = capabilities,
-						on_attach = on_attach,
-						settings = servers[server_name],
-					})
-				end,
-			})
-		end,
-	},
-	{
-		"MysticalDevil/inlay-hints.nvim",
-		event = "LspAttach",
-		dependencies = {
-			"neovim/nvim-lspconfig",
-			"felpafel/inlay-hint.nvim",
-		},
-		config = function()
-			require("inlay-hint").setup()
-			require("inlay-hints").setup()
-		end,
-	},
-	{
-		"folke/lazydev.nvim",
-		ft = "lua",
-		opts = { library = { "luvit-meta/library" } },
-		dependencies = "neovim/nvim-lspconfig",
-	},
-	{
-		"hrsh7th/nvim-cmp",
-		opts = function(_, opts)
-			opts.sources = opts.sources or {}
-			table.insert(opts.sources, {
-				name = "lazydev",
-				group_index = 0,
-			})
-		end,
-	},
-	{
-		"pmizio/typescript-tools.nvim",
-		ft = "typescript",
-		config = function()
-			require("typescript-tools").setup({
+			local lsp = require("lspconfig")
+			lsp.pyright.setup({
+				cmd = { vim.fn.expand("~/.local/python/bin/pyright-langserver"), "--stdio" },
 				settings = {
-					complete_function_calls = false,
-					include_completions_with_insert_text = false,
-					code_lens = "off",
-					disable_member_code_lens = false,
-					jsx_close_tag = { enable = false },
-					--- Inlay Hints
-					tsserver_file_preferences = {
-						includeInlayParameterNameHints = "all",
-						includeInlayParameterNameHintsWhenArgumentMatchesName = false,
-						includeInlayFunctionParameterTypeHints = true,
-						includeInlayVariableTypeHints = true,
-						includeInlayVariableTypeHintsWhenTypeMatchesName = false,
-						includeInlayPropertyDeclarationTypeHints = true,
-						includeInlayFunctionLikeReturnTypeHints = true,
-						includeInlayEnumMemberValueHints = true,
+					python = {
+						pythonPath = vim.g.python3_host_prog,
+						analysis = {
+							logLevel = "Error",
+						},
 					},
 				},
 			})

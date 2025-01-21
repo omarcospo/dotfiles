@@ -60,6 +60,7 @@ return {
 				typst = { "typstfmt" },
 			},
 		})
+		require("mason").setup()
 		require("mason-conform").setup()
 		-- Create an autocmd for Svelte files
 		vim.api.nvim_create_autocmd("BufWritePre", {
