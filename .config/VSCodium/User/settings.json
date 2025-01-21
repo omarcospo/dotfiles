@@ -11,7 +11,6 @@
     "editor.minimap.enabled": false,
     "workbench.editor.showIcons": false,
     "window.titleBarStyle": "custom",
-    "window.menuBarVisibility": "hidden",
     "workbench.activityBar.location": "default",
     "breadcrumbs.enabled": false,
     // Terminal
@@ -46,4 +45,5 @@
     "[html]": {
         "editor.suggest.insertMode": "replace"
     },
+    "explorer.confirmDragAndDrop": false,
 }
