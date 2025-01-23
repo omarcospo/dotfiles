@@ -13,10 +13,10 @@ return {
 				WARN = "",
 			},
 			minimum_width = 30,
-			max_height = 5,
+			max_height = 10,
 			render = "wrapped-compact",
 			stages = "static",
-			timeout = 1000,
+			timeout = 3000,
 		},
 		config = function(_, opts)
 			local notify = require("notify")
