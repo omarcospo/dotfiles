@@ -22,7 +22,7 @@ return {
 					},
 				},
 				mappings = {
-					vert_split = "<C-v>",
+					vert_split = "<C-s>",
 					horz_split = "<C-h>",
 					tabedit = "<C-t>",
 					edit = "<C-e>",
