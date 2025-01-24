@@ -1,8 +1,23 @@
+cursor-style = underline
+shell-integration = none
+
+# font
+bold-is-bright = false
 font-family = Iosevka Nerd Font
 font-size = 15
+
+# window
 window-decoration = false
-cursor-style = underline
-shell-integration-features = no-cursor
+confirm-close-surface = false
+resize-overlay = always
+window-save-state = never
+window-padding-x = 0
+window-padding-y = 0
+
+# startup performance
+linux-cgroup = never
+
+# gruvbox theme
 palette = 0=#1b1b1b
 palette = 1=#ea6962
 palette = 2=#a9b665
