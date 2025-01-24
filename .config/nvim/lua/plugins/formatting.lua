@@ -46,7 +46,7 @@ return {
 			},
 			formatters_by_ft = {
 				lua = { "stylua" },
-				python = { "black" },
+				python = { "ruff_format" },
 				html = { "prettier" },
 				htmldjango = { "djlint" },
 				typescript = { "biome" },
