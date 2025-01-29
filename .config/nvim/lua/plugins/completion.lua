@@ -28,7 +28,7 @@ return {
 				menu = {
 					min_width = 10,
 					max_height = 10,
-					border = "single",
+					border = "rounded",
 					winhighlight = "Normal:NormalFloat,FloatBorder:FloatBorder,CursorLine:BlinkCmpMenuSelection,Search:None",
 					draw = { align_to = "cursor" },
 				},
@@ -39,8 +39,7 @@ return {
 						min_width = 10,
 						max_width = 100,
 						max_height = 20,
-						border = "single",
-						winblend = 20,
+						border = "rounded",
 						winhighlight = "Normal:Normal,FloatBorder:FloatBorder,EndOfBuffer:BlinkCmpDoc",
 					},
 				},
